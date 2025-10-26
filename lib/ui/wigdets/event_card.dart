@@ -1,5 +1,4 @@
 import 'package:evently/modules/event_dm.dart';
-import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/firebase/event_firebase.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
 import 'package:evently/ui/wigdets/int_extention.dart';

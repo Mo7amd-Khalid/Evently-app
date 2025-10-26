@@ -2,7 +2,6 @@ import 'package:evently/core/theme/app_colors.dart';
 import 'package:evently/l10n/generated/app_localizations.dart';
 import 'package:evently/ui/home/bottom_nav_bar_tabs/favorite.dart';
 import 'package:evently/ui/home/bottom_nav_bar_tabs/map.dart';
-import 'package:evently/ui/wigdets/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'bottom_nav_bar_tabs/event_management_screen/event_management_screen.dart';
 import 'bottom_nav_bar_tabs/home.dart';

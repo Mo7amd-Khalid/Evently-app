@@ -1,4 +1,3 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDM{
