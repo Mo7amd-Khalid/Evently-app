@@ -1,5 +1,6 @@
 import 'package:evently/l10n/generated/app_localizations.dart';
 import 'package:evently/provider/app_config_provider.dart';
+import 'package:evently/ui/home/main_screen.dart';
 import 'package:evently/ui/wigdets/app_dialogs.dart';
 import 'package:evently/validation/data_validation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ import '../../../firebase/event_firebase.dart';
 class EventManagementScreen extends StatefulWidget {
 
   static const String routeName = "Event Management Screen";
-  const EventManagementScreen({super.key});
+  EventDM? eventNeedToUpdate;
+  EventManagementScreen({super.key, this.eventNeedToUpdate});
 
   @override
   State<EventManagementScreen> createState() => _EventManagementScreenState();
@@ -21,18 +23,37 @@ class EventManagementScreen extends StatefulWidget {
 
 class _EventManagementScreenState extends State<EventManagementScreen> {
   int selectedTab = 0;
+
   TextEditingController titleController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
+
   DateTime? selectedDate;
+
   TimeOfDay? selectedTime;
+
   List<CategoryDM> category = CategoryDM.categoriesList;
+
+
+  @override
+  void initState() {
+    super.initState();
+    selectedTab = widget.eventNeedToUpdate == null ? 0 : widget.eventNeedToUpdate!.category.id;
+    selectedDate = widget.eventNeedToUpdate == null ? null : DateTime.fromMillisecondsSinceEpoch(widget.eventNeedToUpdate!.date);
+    selectedTime = widget.eventNeedToUpdate == null ? null : TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(widget.eventNeedToUpdate!.time));
+    titleController.text =widget.eventNeedToUpdate == null ? "" : widget.eventNeedToUpdate!.title;
+    descriptionController.text = widget.eventNeedToUpdate == null ? "" : widget.eventNeedToUpdate!.description;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
+    var locale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "Create Event",
+          widget.eventNeedToUpdate == null ? locale.createEvent : locale.editEvent,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         centerTitle: true,
@@ -42,10 +63,10 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
         child: ListView(
           children: [
             ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AspectRatio(
+              borderRadius: BorderRadius.circular(16),
+              child: AspectRatio(
                   aspectRatio: 360/200,
-                    child: Image.asset(category[selectedTab].image)),
+                  child: Image.asset(category[selectedTab].image)),
             ),
             SizedBox(
               height: 10,
@@ -57,7 +78,6 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                     setState(() {
                       selectedTab = index;
                     });
-
                   },
                   isScrollable: true,
                   padding: EdgeInsets.zero,
@@ -80,7 +100,10 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                         spacing: 5,
                         children: [
                           Icon(e.icon,color: selectedTab == e.id? AppColors.white : AppColors.purple,),
-                          Text(provider.isEN()? e.nameEN : e.nameAR, style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:selectedTab == e.id? AppColors.white : AppColors.purple),),
+                          Text(provider.isEN()?
+                          e.nameEN :
+                          e.nameAR,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color:selectedTab == e.id? AppColors.white : AppColors.purple),),
                         ],
                       ),
                     ),
@@ -90,7 +113,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
               height: 10,
             ),
             Text(
-                "Title",
+                locale.title,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(
@@ -102,7 +125,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
               validator: (value) => DataValidation.titleEventValidator(value!, AppLocalizations.of(context)!),
               controller: titleController,
               decoration: InputDecoration(
-                hintText: "Event Title",
+                hintText: locale.eventTitle,
                 prefixIcon: Icon(Icons.edit)
               ),
             ),
@@ -111,7 +134,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
               height: 10,
             ),
             Text(
-              "Description",
+              locale.description,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(
@@ -124,7 +147,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
               controller: descriptionController,
               maxLines: 5,
               decoration: InputDecoration(
-                  hintText: "Event Description",
+                  hintText: locale.eventDescription,
               ),
             ),
 
@@ -133,45 +156,24 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                 Icon(Icons.calendar_month_outlined),
                 SizedBox(width: 10,),
                 Text(
-                    selectedDate == null ? "Event Date" : DateFormat("dd/MM/yyyy").format(selectedDate!)),
-                Spacer(),
-                TextButton(
-                    onPressed: (){
-                      showDatePicker(
-                          context: context,
-                          firstDate: DateTime.now(),
-                          initialDate: selectedDate??DateTime.now(),
-                          lastDate: DateTime.now().add(Duration(days: 365))).then((value){
-                            setState(() {
-                              selectedDate = value;
-                            });
-                      });
-                    },
-                  style: TextButton.styleFrom(
-                    textStyle: TextStyle(
-                      fontSize: 16,
-                      decoration: TextDecoration.none
-                    )
-                  ),
-                    child: Text("Choose Date"),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Icon(Icons.watch_later_outlined),
-                SizedBox(width: 10,),
-                Text(
-                    selectedTime == null? "Event Time" : DateFormat("h:mm a").format(DateTime(0,0,0,selectedTime!.hour,selectedTime!.minute))),
+                    selectedDate == null ?
+                    locale.eventDate :
+                    DateFormat("dd/MM/yyyy").format(selectedDate!)),
                 Spacer(),
                 TextButton(
                   onPressed: (){
-                    showTimePicker(context: context, initialTime: selectedTime??TimeOfDay.now()).then((value){
+                    showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      initialDate: selectedDate??DateTime.now(),
+                      lastDate: DateTime.now().add(Duration(days: 365)),
+                    ).then((dateValue){
                       setState(() {
-                        selectedTime = value;
+                        selectedDate = dateValue;
                       });
 
                     });
+
                   },
                   style: TextButton.styleFrom(
                       textStyle: TextStyle(
@@ -179,7 +181,40 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                           decoration: TextDecoration.none
                       )
                   ),
-                  child: Text("Choose Time"),
+                  child: Text(locale.chooseDate),
+                )
+              ],
+            ),
+
+
+            Row(
+              children: [
+                Icon(Icons.watch_later_outlined),
+                SizedBox(width: 10,),
+                Text(
+                    selectedTime == null?
+                    locale.eventTime :
+                    DateFormat("h:mm a").format(DateTime(0,0,0,selectedTime!.hour,selectedTime!.minute))),
+                Spacer(),
+                TextButton(
+                  onPressed: () {
+                    showTimePicker(
+                      context: context,
+                      initialTime: selectedTime ?? TimeOfDay.now(),
+                    ).then((value) {
+                      setState(() {
+                        selectedTime = value;
+                      });
+                    });
+
+                  },
+                  style: TextButton.styleFrom(
+                      textStyle: TextStyle(
+                          fontSize: 16,
+                          decoration: TextDecoration.none
+                      )
+                  ),
+                  child: Text(locale.chooseTime),
                 )
               ],
             ),
@@ -188,7 +223,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
               height: 10,
             ),
             Text(
-              "Location",
+              locale.location,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(
@@ -216,7 +251,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                       ),
                     ),
                     Text(
-                        "Choose Event Location",
+                        locale.chooseEventLocation,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Spacer(),
@@ -232,64 +267,96 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                   String errorMessage = "";
                   if(titleController.text.isEmpty)
                     {
-                      errorMessage += "\nThe Title is required";
+                      errorMessage += "\n${locale.titleRequired}";
                     }
                   if(descriptionController.text.isEmpty)
                     {
-                      errorMessage += "\nThe Description is required";
+                      errorMessage += "\n${locale.descriptionRequired}";
                     }
                   if(selectedTime == null)
                     {
-                      errorMessage += "\nThe Time is required";
+                      errorMessage += "\n${locale.timeRequired}";
                     }
                   if(selectedDate == null)
                     {
-                      errorMessage += "\nThe Date is required";
+                      errorMessage += "\n${locale.dateRequired}";
                     }
 
                   if(errorMessage.isEmpty)
                     {
-                      AppDialogs.loadingDialog(context: context, loadingMessage: "Loading...");
-                      EventManagementFirebase.addEvent(EventDM(
-                        id: "",
-                        title: titleController.text,
-                        description: descriptionController.text,
-                        category: category[selectedTab],
-                        date: selectedDate!.millisecondsSinceEpoch,
-                        time: DateTime(0,0,0,selectedTime!.hour,selectedTime!.minute).millisecondsSinceEpoch)).then((value){
-                          Navigator.pop(context);
-                          AppDialogs.actionDialog(
+                      AppDialogs.loadingDialog(context: context, loadingMessage: locale.loading);
+                      if(widget.eventNeedToUpdate == null)
+                        {
+                          EventManagementFirebase.addEvent(EventDM(
+                              id: "",
+                              title: titleController.text,
+                              description: descriptionController.text,
+                              category: category[selectedTab],
+                              date: selectedDate!.millisecondsSinceEpoch,
+                              time: DateTime(0,0,0,selectedTime!.hour,selectedTime!.minute).millisecondsSinceEpoch)).then((value){
+                            Navigator.pop(context);
+                            AppDialogs.actionDialog(
+                                context: context,
+                                title: locale.addEvent,
+                                content: locale.eventAddedSuccessfully,
+                                posActionTitle: locale.ok,
+                                posAction: (){
+                                  Navigator.pop(context);
+                                }
+                            );
+                          }).onError((error,_){
+                            Navigator.pop(context);
+                            AppDialogs.actionDialog(
                               context: context,
-                            title: "Add Event",
-                            content: "Event Added Successfully",
-                            posActionTitle: "OK",
-                            posAction: (){
-                                Navigator.pop(context);
-                            }
-                              );
-                      }).onError((error,_){
-                        Navigator.pop(context);
-                        AppDialogs.actionDialog(
-                          context: context,
-                          title: "Failed Event",
-                          content: error.toString(),
-                          posActionTitle: "Try Again",
-                        );
-                      });
+                              title: locale.failedEvent,
+                              content: error.toString(),
+                              posActionTitle: locale.tryAgain,
+                            );
+                          });
+                        }
+                      else
+                        {
+                          widget.eventNeedToUpdate!.category = category[selectedTab];
+                          widget.eventNeedToUpdate!.time = DateTime(0,0,0,selectedTime!.hour,selectedTime!.minute).millisecondsSinceEpoch;
+                          widget.eventNeedToUpdate!.date = selectedDate!.millisecondsSinceEpoch;
+                          widget.eventNeedToUpdate!.title = titleController.text;
+                          widget.eventNeedToUpdate!.description = descriptionController.text;
+                          EventManagementFirebase.updateEvent(widget.eventNeedToUpdate!).then((value){
+                            Navigator.pop(context);
+                            AppDialogs.actionDialog(
+                                context: context,
+                                title: locale.updateEvent,
+                                content: locale.eventUpdatedSuccessfully,
+                                posActionTitle: locale.ok,
+                                posAction: (){
+                                  Navigator.pushReplacementNamed(context,MainScreen.routeName);
+                                }
+                            );
+                          }).onError((error,_){
+                            Navigator.pop(context);
+                            AppDialogs.actionDialog(
+                              context: context,
+                              title: locale.updateEvent,
+                              content: error.toString(),
+                              posActionTitle: locale.tryAgain,
+                            );
+                          });;
+                        }
+
                     }
                   else
                     {
                       AppDialogs.actionDialog(
                           context: context,
-                        title: "Invalid Data",
+                        title: locale.invalidData,
                         content: errorMessage.trim(),
-                        posActionTitle: "Try Again",
+                        posActionTitle: locale.tryAgain,
                       );
                     }
 
                 },
                 child: Text(
-                    "Add Event",
+                  widget.eventNeedToUpdate == null ? locale.addEvent : locale.updateEvent,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.white),
                 )),
 
@@ -299,3 +366,5 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
     );
   }
 }
+
+

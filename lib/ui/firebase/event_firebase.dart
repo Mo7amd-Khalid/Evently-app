@@ -38,6 +38,7 @@ class EventManagementFirebase {
             .where("date" , isGreaterThanOrEqualTo: date)
             .snapshots();
       }
+    print(categoryID);
     return data;
   }
 
@@ -54,5 +55,29 @@ class EventManagementFirebase {
       }
     await collection.doc(event.id).update(event.toFirestore());
 
+  }
+
+  static Future<void> updateEvent(EventDM event)async
+  {
+    var collection = getCollection();
+    await collection.doc(event.id).update(event.toFirestore());
+  }
+
+  static Stream<QuerySnapshot<EventDM>> getEventsFav(String uid)
+  {
+    CollectionReference<EventDM> collection = getCollection();
+    Stream<QuerySnapshot<EventDM>> data;
+    int date = DateTime.now().dateOnly.millisecondsSinceEpoch;
+    data = collection
+        .where("favUsers" ,arrayContains: uid)
+        .where("date" , isGreaterThanOrEqualTo: date)
+        .snapshots();
+    return data;
+  }
+
+  static Future<void> deleteEvent(String eventID) async
+  {
+    var collection = getCollection();
+    await collection.doc(eventID).delete();
   }
 }

@@ -30,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: bottomNavBarTabs[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index){

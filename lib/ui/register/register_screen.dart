@@ -125,7 +125,7 @@ class RegisterScreen extends StatelessWidget {
                 if (formKey.currentState!.validate()) {
                   AppDialogs.loadingDialog(
                     context: context,
-                    loadingMessage: "Loading...",
+                    loadingMessage: locale.loading,
                     dismissable: false,
                   );
                   FirebaseAuthServices.registerUser(
@@ -138,9 +138,9 @@ class RegisterScreen extends StatelessWidget {
                     Navigator.pop(context);
                     AppDialogs.actionDialog(
                       context: context,
-                      title: "Registration Failed",
-                      content: "Please Enter Valid Data",
-                      posActionTitle: "Try Again",
+                      title: locale.registrationFailed,
+                      content: locale.invalidCredentials,
+                      posActionTitle: locale.tryAgain,
                     );
                     print(error.toString());
                   });

@@ -26,6 +26,12 @@
   "alreadyHaveAccount": "Already Have Account ?",
   "nameRequired": "Name is required",
   "nameInvalid": "User Name is invalid",
+  "loginFailed": "Login Failed",
+  "invalidCredentials": "Please Enter Valid Email and Password",
+
+
+  "registrationFailed": "Registration Failed",
+  "pleaseEnterValidData": "Please Enter Valid Data",
 
   "emailRequired": "Email is required",
   "emailInvalid": "Email is invalid",
@@ -59,5 +65,46 @@
   "dark": "Dark",
   "loginError": "The email or password isn`t correct. Please try again",
   "loginSuccess": "Login done successfully",
-  "all": "All"
+  "all": "All",
+
+  "createEvent": "Create Event",
+  "title": "Title",
+  "eventTitle": "Event Title",
+  "description": "Description",
+  "eventDescription": "Event Description",
+  "eventDate": "Event Date",
+  "chooseDate": "Choose Date",
+  "eventTime": "Event Time",
+  "chooseTime": "Choose Time",
+  "location": "Location",
+  "chooseEventLocation": "Choose Event Location",
+  "addEvent": "Add Event",
+
+
+  "titleRequired": "The Title is required",
+  "descriptionRequired": "The Description is required",
+  "timeRequired": "The Time is required",
+  "dateRequired": "The Date is required",
+  "loading": "Loading...",
+  "eventAddedSuccessfully": "Event Added Successfully",
+  "ok": "OK",
+  "failedEvent": "Failed Event",
+  "tryAgain": "Try Again",
+  "invalidData": "Invalid Data",
+
+  "searchForEvent" : "Search For Event",
+
+
+  "eventDetails": "Event Details",
+  "deleteEvent": "Delete Event",
+  "deleteEventConfirmation": "Are you sure to delete this event?",
+  "yes": "Yes",
+  "no": "No",
+  "eventDeletedSuccessfully": "Event Deleted Successfully",
+
+  "updateEvent" : "Update Event",
+  "eventUpdatedSuccessfully" : "Event Updated Successfully",
+  "editEvent" : "Edit Event"
+
+
 }

@@ -96,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                     {
                       AppDialogs.loadingDialog(
                         context: context,
-                        loadingMessage: "Loading",
+                        loadingMessage: locale.loading,
                         dismissable: false,
                       );
                       FirebaseAuthServices.loginUser(emailController.text, passwordController.text).then((e){
@@ -108,9 +108,9 @@ class LoginScreen extends StatelessWidget {
                         Navigator.pop(context);
                         AppDialogs.actionDialog(
                           context: context,
-                          title: "Login Failed",
-                          content: "Please Enter Valid Email and Password",
-                          posActionTitle: "Try Again",
+                          title: locale.loginFailed,
+                          content: locale.invalidCredentials,
+                          posActionTitle: locale.tryAgain,
                         );
                       });
                     }

@@ -90,6 +90,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nameInvalid => 'اسم المستخدم غير صالح';
 
   @override
+  String get loginFailed => 'فشل تسجيل الدخول';
+
+  @override
+  String get invalidCredentials => 'يرجى إدخال بريد إلكتروني وكلمة مرور صالحين';
+
+  @override
+  String get registrationFailed => 'فشل التسجيل';
+
+  @override
+  String get pleaseEnterValidData => 'يرجى إدخال بيانات صالحة';
+
+  @override
   String get emailRequired => 'البريد الإلكتروني مطلوب';
 
   @override
@@ -172,4 +184,100 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get all => 'الكل';
+
+  @override
+  String get createEvent => 'إنشاء حدث';
+
+  @override
+  String get title => 'العنوان';
+
+  @override
+  String get eventTitle => 'عنوان الحدث';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get eventDescription => 'وصف الحدث';
+
+  @override
+  String get eventDate => 'تاريخ الحدث';
+
+  @override
+  String get chooseDate => 'اختر التاريخ';
+
+  @override
+  String get eventTime => 'وقت الحدث';
+
+  @override
+  String get chooseTime => 'اختر الوقت';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get chooseEventLocation => 'اختر موقع الحدث';
+
+  @override
+  String get addEvent => 'إضافة الحدث';
+
+  @override
+  String get titleRequired => 'العنوان مطلوب';
+
+  @override
+  String get descriptionRequired => 'الوصف مطلوب';
+
+  @override
+  String get timeRequired => 'الوقت مطلوب';
+
+  @override
+  String get dateRequired => 'التاريخ مطلوب';
+
+  @override
+  String get loading => 'جارٍ التحميل...';
+
+  @override
+  String get eventAddedSuccessfully => 'تمت إضافة الحدث بنجاح';
+
+  @override
+  String get ok => 'حسنًا';
+
+  @override
+  String get failedEvent => 'فشل في إضافة الحدث';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get invalidData => 'بيانات غير صالحة';
+
+  @override
+  String get searchForEvent => 'البحث عن حدث';
+
+  @override
+  String get eventDetails => 'تفاصيل الحدث';
+
+  @override
+  String get deleteEvent => 'حذف الحدث';
+
+  @override
+  String get deleteEventConfirmation => 'هل أنت متأكد أنك تريد حذف هذا الحدث؟';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get eventDeletedSuccessfully => 'تم حذف الحدث بنجاح';
+
+  @override
+  String get updateEvent => 'تحديث الحدث';
+
+  @override
+  String get eventUpdatedSuccessfully => 'تم تحديث الحدث بنجاح';
+
+  @override
+  String get editEvent => 'تعديل الحدث';
 }

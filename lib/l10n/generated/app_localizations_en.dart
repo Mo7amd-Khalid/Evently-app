@@ -90,6 +90,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nameInvalid => 'User Name is invalid';
 
   @override
+  String get loginFailed => 'Login Failed';
+
+  @override
+  String get invalidCredentials => 'Please Enter Valid Email and Password';
+
+  @override
+  String get registrationFailed => 'Registration Failed';
+
+  @override
+  String get pleaseEnterValidData => 'Please Enter Valid Data';
+
+  @override
   String get emailRequired => 'Email is required';
 
   @override
@@ -172,4 +184,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get all => 'All';
+
+  @override
+  String get createEvent => 'Create Event';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get eventTitle => 'Event Title';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get eventDescription => 'Event Description';
+
+  @override
+  String get eventDate => 'Event Date';
+
+  @override
+  String get chooseDate => 'Choose Date';
+
+  @override
+  String get eventTime => 'Event Time';
+
+  @override
+  String get chooseTime => 'Choose Time';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get chooseEventLocation => 'Choose Event Location';
+
+  @override
+  String get addEvent => 'Add Event';
+
+  @override
+  String get titleRequired => 'The Title is required';
+
+  @override
+  String get descriptionRequired => 'The Description is required';
+
+  @override
+  String get timeRequired => 'The Time is required';
+
+  @override
+  String get dateRequired => 'The Date is required';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get eventAddedSuccessfully => 'Event Added Successfully';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get failedEvent => 'Failed Event';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get invalidData => 'Invalid Data';
+
+  @override
+  String get searchForEvent => 'Search For Event';
+
+  @override
+  String get eventDetails => 'Event Details';
+
+  @override
+  String get deleteEvent => 'Delete Event';
+
+  @override
+  String get deleteEventConfirmation => 'Are you sure to delete this event?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get eventDeletedSuccessfully => 'Event Deleted Successfully';
+
+  @override
+  String get updateEvent => 'Update Event';
+
+  @override
+  String get eventUpdatedSuccessfully => 'Event Updated Successfully';
+
+  @override
+  String get editEvent => 'Edit Event';
 }
