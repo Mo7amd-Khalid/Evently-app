@@ -23,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
     var size = MediaQuery.sizeOf(context);
     var locale = AppLocalizations.of(context)!;
     var provider = Provider.of<AppConfigProvider>(context);
+    print(profileImage.value);
     return Column(
       children: [
         Expanded(
@@ -59,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                             ), // round
                             image: DecorationImage(
                               image: value == null? AssetImage("assets/images/user_image.jpg"): FileImage(File(value)),
-                              fit: BoxFit.cover
+                              fit: BoxFit.fill
                             ),// ed square shape
                           ),
                           child: Stack(
