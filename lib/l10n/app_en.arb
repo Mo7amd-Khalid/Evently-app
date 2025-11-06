@@ -101,6 +101,9 @@
   "yes": "Yes",
   "no": "No",
   "eventDeletedSuccessfully": "Event Deleted Successfully",
+  "resetPasswordDone": "Reset Password Done Successfully",
+  "resetPasswordFailed": "Reset Password Not Done Successfully",
+  "checkYourMailToResetPassword": "Check your mail to reset password",
 
   "updateEvent" : "Update Event",
   "eventUpdatedSuccessfully" : "Event Updated Successfully",

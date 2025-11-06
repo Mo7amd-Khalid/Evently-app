@@ -107,6 +107,10 @@
   "updateEvent": "تحديث الحدث",
   "eventUpdatedSuccessfully": "تم تحديث الحدث بنجاح",
 
+  "resetPasswordDone": "تم إعادة تعيين كلمة المرور بنجاح",
+  "resetPasswordFailed": "لم تم إعادة تعيين كلمة المرور بنجاح",
+  "checkYourMailToResetPassword": "تحقق من بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+
   "editEvent" : "تعديل الحدث"
 
 

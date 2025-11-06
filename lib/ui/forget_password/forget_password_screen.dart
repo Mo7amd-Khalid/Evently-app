@@ -1,4 +1,6 @@
 import 'package:evently/l10n/generated/app_localizations.dart';
+import 'package:evently/ui/login/login_screen.dart';
+import 'package:evently/ui/wigdets/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import '../../validation/data_validation.dart';
 import '../firebase/firebase_auth_services.dart';
@@ -40,14 +42,28 @@ class ForgetPasswordScreen extends StatelessWidget {
           FilledButton(onPressed: () async{
             if(DataValidation.emailValidation(emailController.text, locale) == null)
               {
-                if(await FirebaseAuthServices.resetPassword(emailController.text))
-                  {
-                    print("reset password done ");
-                  }
-                else
-                  {
-                    print("not done");
-                  }
+                AppDialogs.loadingDialog(context: context, loadingMessage: locale.loading);
+
+                FirebaseAuthServices.resetPassword(emailController.text).then((e){
+                  Navigator.pop(context);
+                  AppDialogs.actionDialog(
+                    context: context,
+                    title: locale.resetPasswordDone,
+                    content: locale.checkYourMailToResetPassword,
+                    posActionTitle: locale.ok,
+                    posAction: (){
+                      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                    }
+                  );
+                }).onError((error,e){
+                  Navigator.pop(context);
+                  AppDialogs.actionDialog(
+                      context: context,
+                      title: locale.resetPasswordFailed,
+                      content: error.toString(),
+                      posActionTitle: locale.tryAgain,
+                  );
+                });
               }
       
           }, child: Text(locale.resetPassword))
