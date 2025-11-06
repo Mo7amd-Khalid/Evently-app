@@ -2,6 +2,7 @@ import 'package:evently/core/theme/app_theme.dart';
 import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
 import 'package:evently/ui/forget_password/forget_password_screen.dart';
+import 'package:evently/ui/home/bottom_nav_bar_tabs/event_management_screen/event_details.dart';
 import 'package:evently/ui/home/bottom_nav_bar_tabs/event_management_screen/event_management_screen.dart';
 import 'package:evently/ui/home/main_screen.dart';
 import 'package:evently/ui/login/login_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
             MainScreen.routeName : (_) => MainScreen(),
             ForgetPasswordScreen.routeName : (_) => ForgetPasswordScreen(),
             EventManagementScreen.routeName : (_) => EventManagementScreen(),
+            EventDetails.routeName : (_) => EventDetails(),
           },
           initialRoute: FirebaseAuthServices.getUserData() == null ? SetupScreen.routeName : MainScreen.routeName,
         );

@@ -30,6 +30,12 @@
   "emailRequired": "البريد الإلكتروني مطلوب",
   "emailInvalid": "البريد الإلكتروني غير صالح",
 
+  "loginFailed": "فشل تسجيل الدخول",
+  "invalidCredentials": "يرجى إدخال بريد إلكتروني وكلمة مرور صالحين",
+
+  "registrationFailed": "فشل التسجيل",
+  "pleaseEnterValidData": "يرجى إدخال بيانات صالحة",
+
   "passwordRequired": "كلمة المرور مطلوبة",
   "passwordInvalid": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وتتضمن حرفًا كبيرًا وحرفًا صغيرًا ورقمًا ورمزًا خاصًا",
 
@@ -61,7 +67,54 @@
   "dark": "غامق",
   "loginError": "البريد الالكتروني او كلمة المرور غير صحيحة. من فضلك اعد المحاولة",
   "loginSuccess": "تسجيل الدخول تم بنجاح",
-  "all": "الكل"
+  "all": "الكل",
+
+  "createEvent": "إنشاء حدث",
+  "title": "العنوان",
+  "eventTitle": "عنوان الحدث",
+  "description": "الوصف",
+  "eventDescription": "وصف الحدث",
+  "eventDate": "تاريخ الحدث",
+  "chooseDate": "اختر التاريخ",
+  "eventTime": "وقت الحدث",
+  "chooseTime": "اختر الوقت",
+  "location": "الموقع",
+  "chooseEventLocation": "اختر موقع الحدث",
+  "addEvent": "إضافة الحدث",
+
+
+  "titleRequired": "العنوان مطلوب",
+  "descriptionRequired": "الوصف مطلوب",
+  "timeRequired": "الوقت مطلوب",
+  "dateRequired": "التاريخ مطلوب",
+  "loading": "جارٍ التحميل...",
+  "eventAddedSuccessfully": "تمت إضافة الحدث بنجاح",
+  "ok": "حسنًا",
+  "failedEvent": "فشل في إضافة الحدث",
+  "tryAgain": "حاول مرة أخرى",
+  "invalidData": "بيانات غير صالحة",
+
+  "searchForEvent" : "البحث عن حدث",
+
+
+  "eventDetails": "تفاصيل الحدث",
+  "deleteEvent": "حذف الحدث",
+  "deleteEventConfirmation": "هل أنت متأكد أنك تريد حذف هذا الحدث؟",
+  "yes": "نعم",
+  "no": "لا",
+  "eventDeletedSuccessfully": "تم حذف الحدث بنجاح",
+
+  "updateEvent": "تحديث الحدث",
+  "eventUpdatedSuccessfully": "تم تحديث الحدث بنجاح",
+
+  "resetPasswordDone": "تم إعادة تعيين كلمة المرور بنجاح",
+  "resetPasswordFailed": "لم تم إعادة تعيين كلمة المرور بنجاح",
+  "checkYourMailToResetPassword": "تحقق من بريدك الإلكتروني لإعادة تعيين كلمة المرور",
+
+  "editEvent" : "تعديل الحدث"
+
+
+
 
 
 }
