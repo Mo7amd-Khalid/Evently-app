@@ -1,4 +1,4 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/modules/event_dm.dart';
 import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/firebase/event_firebase.dart';

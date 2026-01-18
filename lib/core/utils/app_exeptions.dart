@@ -1,0 +1,1 @@
+class SharedPreferencesException implements Exception{}

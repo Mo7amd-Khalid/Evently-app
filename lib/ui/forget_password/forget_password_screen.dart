@@ -1,5 +1,5 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
-import 'package:evently/ui/login/login_screen.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
+import 'package:evently/presentation/login/login_screen.dart';
 import 'package:evently/ui/wigdets/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import '../../validation/data_validation.dart';
