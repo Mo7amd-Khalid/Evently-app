@@ -1,5 +1,5 @@
 import 'package:evently/core/theme/app_colors.dart';
-import 'package:evently/l10n/generated/app_localizations.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/ui/home/bottom_nav_bar_tabs/favorite.dart';
 import 'package:evently/ui/home/bottom_nav_bar_tabs/map.dart';
 import 'package:flutter/material.dart';

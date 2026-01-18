@@ -1,4 +1,4 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/home/main_screen.dart';
 import 'package:evently/ui/wigdets/app_dialogs.dart';
@@ -14,8 +14,8 @@ import '../../../firebase/event_firebase.dart';
 class EventManagementScreen extends StatefulWidget {
 
   static const String routeName = "Event Management Screen";
-  EventDM? eventNeedToUpdate;
-  EventManagementScreen({super.key, this.eventNeedToUpdate});
+  final EventDM? eventNeedToUpdate;
+  const EventManagementScreen({super.key, this.eventNeedToUpdate});
 
   @override
   State<EventManagementScreen> createState() => _EventManagementScreenState();

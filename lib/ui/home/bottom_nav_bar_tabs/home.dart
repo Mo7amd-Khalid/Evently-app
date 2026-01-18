@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../l10n/generated/app_localizations.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 import '../../../modules/category_dm.dart';
 import '../../../provider/app_config_provider.dart';
 import '../../firebase/firebase_auth_services.dart';

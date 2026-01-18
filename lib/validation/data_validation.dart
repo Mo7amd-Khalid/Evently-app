@@ -1,4 +1,5 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
+
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 
 class DataValidation{
   static String? nameValidation(String value, AppLocalizations locale){
