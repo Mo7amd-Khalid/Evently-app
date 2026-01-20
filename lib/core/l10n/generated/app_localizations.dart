@@ -272,6 +272,24 @@ abstract class AppLocalizations {
   /// **'Please Enter Valid Email and Password'**
   String get invalidCredentials;
 
+  /// No description provided for @verificationEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Email'**
+  String get verificationEmail;
+
+  /// No description provided for @checkYourMail.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a verification email to your email address during 30 seconds\nPress check your mail (inbox or spam) and click on the link to be able to login'**
+  String get checkYourMail;
+
+  /// No description provided for @sendAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Again'**
+  String get sendAgain;
+
   /// No description provided for @registrationFailed.
   ///
   /// In en, this message translates to:

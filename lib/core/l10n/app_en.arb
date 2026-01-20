@@ -29,6 +29,9 @@
   "loginFailed": "Login Failed",
   "invalidCredentials": "Please Enter Valid Email and Password",
 
+  "verificationEmail" : "Verification Email",
+  "checkYourMail" : "We sent a verification email to your email address during 30 seconds\nPress check your mail (inbox or spam) and click on the link to be able to login",
+  "sendAgain" : "Send Again",
 
   "registrationFailed": "Registration Failed",
   "pleaseEnterValidData": "Please Enter Valid Data",

@@ -1,14 +1,14 @@
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/home/main_screen.dart';
-import 'package:evently/ui/wigdets/app_dialogs.dart';
+import 'package:evently/presentation/widgets/app_dialogs.dart';
 import 'package:evently/validation/data_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../modules/category_dm.dart';
-import '../../../../modules/event_dm.dart';
+import '../../../../data/models/category_dm.dart';
+import '../../../../data/models/event_dm.dart';
 import '../../../firebase/event_firebase.dart';
 
 class EventManagementScreen extends StatefulWidget {

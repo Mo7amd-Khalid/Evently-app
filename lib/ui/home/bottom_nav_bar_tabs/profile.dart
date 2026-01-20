@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/provider/app_config_provider.dart';
-import 'package:evently/presentation/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
+import '../../../core/routes/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../firebase/firebase_auth_services.dart';
-import '../../wigdets/app_dialogs.dart';
+import '../../../presentation/widgets/app_dialogs.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -209,7 +208,7 @@ class ProfileScreen extends StatelessWidget {
                 );
                 FirebaseAuthServices.logout().then((e){
                   Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                  Navigator.pushReplacementNamed(context, Routes.login);
                 }).onError((error,_){
                   Navigator.pop(context);
                   AppDialogs.actionDialog(

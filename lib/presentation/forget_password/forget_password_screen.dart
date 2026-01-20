@@ -1,9 +1,9 @@
 import 'package:evently/core/l10n/generated/app_localizations.dart';
-import 'package:evently/presentation/login/login_screen.dart';
-import 'package:evently/ui/wigdets/app_dialogs.dart';
+import 'package:evently/core/routes/routes.dart';
+import 'package:evently/presentation/widgets/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import '../../validation/data_validation.dart';
-import '../firebase/firebase_auth_services.dart';
+import '../../ui/firebase/firebase_auth_services.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
@@ -52,7 +52,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     content: locale.checkYourMailToResetPassword,
                     posActionTitle: locale.ok,
                     posAction: (){
-                      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                      Navigator.pushReplacementNamed(context, Routes.login);
                     }
                   );
                 }).onError((error,e){

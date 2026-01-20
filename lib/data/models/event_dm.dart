@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently/modules/category_dm.dart';
+import 'package:evently/data/models/category_dm.dart';
 
 
 class EventDM{

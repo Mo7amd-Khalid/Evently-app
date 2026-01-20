@@ -100,6 +100,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidCredentials => 'Please Enter Valid Email and Password';
 
   @override
+  String get verificationEmail => 'Verification Email';
+
+  @override
+  String get checkYourMail =>
+      'We sent a verification email to your email address during 30 seconds\nPress check your mail (inbox or spam) and click on the link to be able to login';
+
+  @override
+  String get sendAgain => 'Send Again';
+
+  @override
   String get registrationFailed => 'Registration Failed';
 
   @override
