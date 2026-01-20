@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 
 import '../../../core/theme/app_colors.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
-import '../../../modules/category_dm.dart';
+import '../../../data/models/category_dm.dart';
 import '../../../provider/app_config_provider.dart';
 import '../../firebase/firebase_auth_services.dart';
-import '../../wigdets/event_card.dart';
+import '../../../presentation/widgets/event_card.dart';
 
 class HomeTabScreen extends StatefulWidget {
 

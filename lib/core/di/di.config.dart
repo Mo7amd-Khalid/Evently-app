@@ -9,17 +9,28 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
+import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../data/datasource/contract/auth_remote_datasource.dart' as _i912;
 import '../../data/datasource/contract/local_datasource.dart' as _i486;
+import '../../data/datasource/impl/auth_remote_datasource_impl.dart' as _i939;
 import '../../data/datasource/impl/local_datasource_impl.dart' as _i23;
+import '../../data/models/event_dm.dart' as _i668;
+import '../../data/repo_impl/auth_repo_impl.dart' as _i540;
 import '../../data/repo_impl/repo_impl.dart' as _i212;
+import '../../domain/repository/auth_repository.dart' as _i614;
 import '../../domain/repository/evently_repo.dart' as _i596;
+import '../../domain/use_case/auth_use_case.dart' as _i185;
 import '../../domain/use_case/use_case.dart' as _i719;
+import '../../presentation/login/cubit/login_cubit.dart' as _i101;
 import '../../presentation/onboarding/cubit/onboarding_cubit.dart' as _i657;
+import '../../presentation/register/cubit/register_cubit.dart' as _i849;
 import '../../presentation/setup/cubit/setup_cubit.dart' as _i536;
+import 'provide_firebase.dart' as _i743;
 import 'provide_sharedPreferences.dart' as _i1041;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -30,18 +41,41 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final provideSharedPreferences = _$ProvideSharedPreferences();
+    final provideFirebase = _$ProvideFirebase();
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => provideSharedPreferences.provideShared(),
       preResolve: true,
     );
+    gh.lazySingleton<_i59.FirebaseAuth>(() => provideFirebase.firebaseAuth());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+      () => provideFirebase.firebaseFirestore(),
+    );
+    gh.lazySingleton<_i974.CollectionReference<_i668.EventDM>>(
+      () => provideFirebase.getCollection(),
+    );
     gh.factory<_i486.LocalDatasource>(
       () => _i23.LocalDatasourceImpl(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i912.AuthRemoteDatasource>(
+      () => _i939.AuthRemoteDatasourceImpl(gh<_i59.FirebaseAuth>()),
     );
     gh.factory<_i596.EventlyRepository>(
       () => _i212.RepoImpl(gh<_i486.LocalDatasource>()),
     );
+    gh.factory<_i614.AuthRepository>(
+      () => _i540.AuthRepoImpl(gh<_i912.AuthRemoteDatasource>()),
+    );
+    gh.factory<_i185.AuthUseCase>(
+      () => _i185.AuthUseCase(gh<_i614.AuthRepository>()),
+    );
     gh.factory<_i719.EventlyUseCase>(
       () => _i719.EventlyUseCase(gh<_i596.EventlyRepository>()),
+    );
+    gh.factory<_i101.LoginCubit>(
+      () => _i101.LoginCubit(gh<_i185.AuthUseCase>()),
+    );
+    gh.factory<_i849.RegisterCubit>(
+      () => _i849.RegisterCubit(gh<_i185.AuthUseCase>()),
     );
     gh.singleton<_i536.SetupCubit>(
       () => _i536.SetupCubit(gh<_i719.EventlyUseCase>()),
@@ -54,3 +88,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$ProvideSharedPreferences extends _i1041.ProvideSharedPreferences {}
+
+class _$ProvideFirebase extends _i743.ProvideFirebase {}

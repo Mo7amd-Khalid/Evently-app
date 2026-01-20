@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently/modules/event_dm.dart';
+import 'package:evently/data/models/event_dm.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
-import 'package:evently/ui/wigdets/date_extention.dart';
+import 'package:evently/core/utils/date_extention.dart';
 
 class EventManagementFirebase {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;

@@ -1,7 +1,7 @@
 import 'package:evently/core/di/di.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/core/routes/routes.dart';
-import 'package:evently/modules/onboarding_dm.dart';
+import 'package:evently/data/models/onboarding_dm.dart';
 import 'package:evently/presentation/onboarding/cubit/onboarding_cubit.dart';
 import 'package:evently/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:flutter/material.dart';

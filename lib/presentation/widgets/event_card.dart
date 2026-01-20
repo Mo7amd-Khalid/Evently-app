@@ -1,10 +1,10 @@
-import 'package:evently/modules/event_dm.dart';
+import 'package:evently/data/models/event_dm.dart';
 import 'package:evently/ui/firebase/event_firebase.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
-import 'package:evently/ui/wigdets/int_extention.dart';
+import 'package:evently/core/utils/int_extention.dart';
 import 'package:flutter/material.dart';
 
-import '../home/bottom_nav_bar_tabs/event_management_screen/event_details.dart';
+import '../../ui/home/bottom_nav_bar_tabs/event_management_screen/event_details.dart';
 
 class EventCart extends StatelessWidget {
   EventCart({required this.event,super.key});

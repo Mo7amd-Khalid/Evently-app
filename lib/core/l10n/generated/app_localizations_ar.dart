@@ -100,6 +100,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidCredentials => 'يرجى إدخال بريد إلكتروني وكلمة مرور صالحين';
 
   @override
+  String get verificationEmail => 'البريد الإلكتروني للتحقق';
+
+  @override
+  String get checkYourMail =>
+      'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني خلال 30 ثانية\nيرجى التحقق من بريدك الوارد (أو مجلد البريد غير الهام) والضغط على الرابط لتتمكن من تسجيل الدخول';
+
+  @override
+  String get sendAgain => 'إرسال مرة أخرى';
+
+  @override
   String get registrationFailed => 'فشل التسجيل';
 
   @override
