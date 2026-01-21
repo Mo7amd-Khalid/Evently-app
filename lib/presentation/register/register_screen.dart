@@ -62,17 +62,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         case ShowVerificationDialog():
           {
+            Navigator.pop(context);
             AppDialogs.actionDialog(
               context: context,
               title: AppLocalizations.of(context)?.verificationEmail,
               content: AppLocalizations.of(context)?.checkYourMail,
               posActionTitle: AppLocalizations.of(context)?.ok ?? "",
               posAction: (){
-                registerCubit.doAction(GoToLoginScreen());
+                registerCubit.doAction(CheckVerificationUser());
               },
               negActionTitle: AppLocalizations.of(context)?.sendAgain ?? "",
               negAction: (){
-                registerCubit.doAction(SendVerificationEmail(registerCubit.state.user.data!));
+                registerCubit.doAction(SendVerificationEmail());
               },
               dismissable: false,
             );

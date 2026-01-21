@@ -16,8 +16,12 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../data/datasource/contract/auth_remote_datasource.dart' as _i912;
+import '../../data/datasource/contract/firestore_remote_datasource.dart'
+    as _i725;
 import '../../data/datasource/contract/local_datasource.dart' as _i486;
 import '../../data/datasource/impl/auth_remote_datasource_impl.dart' as _i939;
+import '../../data/datasource/impl/firestore_remote_datasource_impl.dart'
+    as _i665;
 import '../../data/datasource/impl/local_datasource_impl.dart' as _i23;
 import '../../data/models/event_dm.dart' as _i668;
 import '../../data/repo_impl/auth_repo_impl.dart' as _i540;
@@ -51,7 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => provideFirebase.firebaseFirestore(),
     );
     gh.lazySingleton<_i974.CollectionReference<_i668.EventDM>>(
-      () => provideFirebase.getCollection(),
+      () => provideFirebase.getEventCollection(),
     );
     gh.factory<_i486.LocalDatasource>(
       () => _i23.LocalDatasourceImpl(gh<_i460.SharedPreferences>()),
@@ -59,29 +63,35 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i912.AuthRemoteDatasource>(
       () => _i939.AuthRemoteDatasourceImpl(gh<_i59.FirebaseAuth>()),
     );
+    gh.factory<_i725.FirestoreRemoteDatasource>(
+      () => _i665.FirestoreRemoteDatasourceImpl(gh<_i974.FirebaseFirestore>()),
+    );
     gh.factory<_i596.EventlyRepository>(
       () => _i212.RepoImpl(gh<_i486.LocalDatasource>()),
-    );
-    gh.factory<_i614.AuthRepository>(
-      () => _i540.AuthRepoImpl(gh<_i912.AuthRemoteDatasource>()),
-    );
-    gh.factory<_i185.AuthUseCase>(
-      () => _i185.AuthUseCase(gh<_i614.AuthRepository>()),
     );
     gh.factory<_i719.EventlyUseCase>(
       () => _i719.EventlyUseCase(gh<_i596.EventlyRepository>()),
     );
-    gh.factory<_i101.LoginCubit>(
-      () => _i101.LoginCubit(gh<_i185.AuthUseCase>()),
-    );
-    gh.factory<_i849.RegisterCubit>(
-      () => _i849.RegisterCubit(gh<_i185.AuthUseCase>()),
+    gh.factory<_i614.AuthRepository>(
+      () => _i540.AuthRepoImpl(
+        gh<_i912.AuthRemoteDatasource>(),
+        gh<_i725.FirestoreRemoteDatasource>(),
+      ),
     );
     gh.singleton<_i536.SetupCubit>(
       () => _i536.SetupCubit(gh<_i719.EventlyUseCase>()),
     );
     gh.factory<_i657.OnboardingCubit>(
       () => _i657.OnboardingCubit(gh<_i719.EventlyUseCase>()),
+    );
+    gh.factory<_i185.AuthUseCase>(
+      () => _i185.AuthUseCase(gh<_i614.AuthRepository>()),
+    );
+    gh.factory<_i101.LoginCubit>(
+      () => _i101.LoginCubit(gh<_i185.AuthUseCase>()),
+    );
+    gh.factory<_i849.RegisterCubit>(
+      () => _i849.RegisterCubit(gh<_i185.AuthUseCase>()),
     );
     return this;
   }

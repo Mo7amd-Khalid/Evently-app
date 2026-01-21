@@ -28,7 +28,9 @@ class RegisterCubit extends BaseCubit<RegisterState, RegisterAction, RegisterNav
       case GoToLoginScreen():
         _goToLoginScreen();
       case SendVerificationEmail():
-        _sendVerificationEmail(action.user);
+        _sendVerificationEmail();
+      case CheckVerificationUser():
+        _checkVerificationUser();
     }
   }
 
@@ -64,8 +66,28 @@ class RegisterCubit extends BaseCubit<RegisterState, RegisterAction, RegisterNav
     emitNavigation(NavigateToLoginScreen());
   }
 
-  void _sendVerificationEmail(UserCredential user) {
-    _useCase.sendVerificationEmail(user);
+  void _sendVerificationEmail() {
+    _useCase.sendVerificationEmail();
+  }
+
+  Future<void> _checkVerificationUser() async{
+
+    await state.user.data!.user!.reload();
+    var response = await _useCase.checkVerificationUser();
+    switch (response) {
+      case Success<User>():
+        {
+          print("successful");
+          emit(state.copyWith(user: Resources.success()));
+          emitNavigation(NavigateToLoginScreen());
+        }
+      case Failure<User>():
+        {
+          print(response.message);
+          emit(state.copyWith(user: Resources.failure(exception: response.exception, message: response.message)));
+        }
+
+    }
   }
 
 
