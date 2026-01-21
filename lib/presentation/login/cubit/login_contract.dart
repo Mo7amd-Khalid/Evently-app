@@ -25,6 +25,8 @@ class LoginWithEmailAndPassword extends LoginAction{
 
 class GoToRegisterScreen extends LoginAction{}
 
+class GoToForgetPasswordScreen extends LoginAction{}
+
 
 
 
@@ -37,3 +39,5 @@ class ShowErrorDialog extends LoginNavigation{}
 class NavigateToHomeScreen extends LoginNavigation{}
 
 class NavigateToRegisterScreen extends LoginNavigation{}
+
+class NavigateToForgetPasswordScreen extends LoginNavigation{}

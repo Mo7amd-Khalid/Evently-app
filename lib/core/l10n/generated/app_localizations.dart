@@ -659,7 +659,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkYourMailToResetPassword.
   ///
   /// In en, this message translates to:
-  /// **'Check your mail to reset password'**
+  /// **'Reset password email sent. Please check your email and make a new password from this link'**
   String get checkYourMailToResetPassword;
 
   /// No description provided for @updateEvent.

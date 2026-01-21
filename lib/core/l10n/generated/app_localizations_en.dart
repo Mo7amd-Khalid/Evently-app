@@ -296,7 +296,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get checkYourMailToResetPassword =>
-      'Check your mail to reset password';
+      'Reset password email sent. Please check your email and make a new password from this link';
 
   @override
   String get updateEvent => 'Update Event';
