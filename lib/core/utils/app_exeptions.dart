@@ -4,6 +4,10 @@ abstract class AppException implements Exception {
   const AppException(this.message);
 }
 
+class NotVerifiedEmailException extends AppException {
+  const NotVerifiedEmailException() : super("Email is not verified");
+}
+
 
 class InvalidCredentialsException extends AppException {
   const InvalidCredentialsException() : super("Invalid email or password");

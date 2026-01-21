@@ -15,8 +15,9 @@ abstract class ProvideFirebase {
   @lazySingleton
   FirebaseFirestore firebaseFirestore() => FirebaseFirestore.instance;
 
+
   @lazySingleton
-  CollectionReference<EventDM> getCollection(){
+  CollectionReference<EventDM> getEventCollection(){
     return getIt<FirebaseFirestore>().collection("events").withConverter(
         fromFirestore: EventDM.fromFirestore,
         toFirestore: (EventDM event,option) => event.toFirestore());

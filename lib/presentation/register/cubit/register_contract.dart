@@ -27,10 +27,12 @@ class RegisterState {
 
 sealed class RegisterAction {}
 
-class SendVerificationEmail extends RegisterAction {
-  UserCredential user;
-  SendVerificationEmail(this.user);
+class CheckVerificationUser extends RegisterAction {
+
 }
+
+
+class SendVerificationEmail extends RegisterAction {}
 
 class RegisterWithEmailAndPassword extends RegisterAction {
   String name;

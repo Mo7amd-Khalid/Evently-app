@@ -1,5 +1,6 @@
 import 'package:evently/core/utils/app_exeptions.dart';
 import 'package:evently/data/datasource/contract/auth_remote_datasource.dart';
+import 'package:evently/data/datasource/contract/firestore_remote_datasource.dart';
 import 'package:evently/data/network/results.dart';
 import 'package:evently/domain/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,14 +9,16 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: AuthRepository)
 class AuthRepoImpl implements AuthRepository {
   final AuthRemoteDatasource _authRemoteDatasource;
+  final FirestoreRemoteDatasource _firestoreRemoteDatasource;
 
-  AuthRepoImpl(this._authRemoteDatasource);
+  AuthRepoImpl(this._authRemoteDatasource, this._firestoreRemoteDatasource);
 
   @override
   Future<Results<User?>> login({
     required String email,
     required String password,
-  }) async {
+  }) async
+  {
     var response = await _authRemoteDatasource.login(email, password);
     switch (response) {
       case Success<User?>():
@@ -57,7 +60,8 @@ class AuthRepoImpl implements AuthRepository {
     required String name,
     required String email,
     required String password,
-  }) async {
+  }) async
+  {
     var response = await _authRemoteDatasource.register(
       name: name,
       email: email,
@@ -66,7 +70,7 @@ class AuthRepoImpl implements AuthRepository {
     switch (response) {
       case Success<UserCredential>():
         {
-          await sendVerificationEmail(response.data!);
+          await sendVerificationEmail();
           await response.data?.user?.updateDisplayName(name);
           return Success(data: response.data, message: response.message);
         }
@@ -79,7 +83,22 @@ class AuthRepoImpl implements AuthRepository {
   }
 
   @override
-  Future<void> sendVerificationEmail(UserCredential user) async {
-    return await _authRemoteDatasource.sendVerificationEmail(user);
+  Future<void> sendVerificationEmail() async {
+    return await _authRemoteDatasource.sendVerificationEmail();
   }
+
+  @override
+  Future<Results<User>> chackVerificationUser() async{
+    var response = await _authRemoteDatasource.chackVerificationUser();
+    switch (response) {
+      case Success<User>():{
+        await _firestoreRemoteDatasource.storeUserDataToUserCollection(response.data!);
+        return Success(data: response.data);
+      }
+      case Failure<User>():
+        return Failure(exception: response.exception, message: response.message);
+    }
+  }
+
+
 }

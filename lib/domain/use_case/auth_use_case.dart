@@ -22,8 +22,12 @@ class AuthUseCase {
   }
 
 
-  Future<void> sendVerificationEmail(UserCredential user){
-    return _authRepository.sendVerificationEmail(user);
+  Future<void> sendVerificationEmail(){
+    return _authRepository.sendVerificationEmail();
+  }
+
+  Future<Results<User>> checkVerificationUser(){
+    return _authRepository.chackVerificationUser();
   }
 
 
