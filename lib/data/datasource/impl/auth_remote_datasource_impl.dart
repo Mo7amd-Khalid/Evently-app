@@ -46,21 +46,31 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   }
 
   @override
-  Future<void> sendVerificationEmail() async{
+  Future<void> sendVerificationEmail() async {
     await _firebaseAuth.currentUser!.sendEmailVerification();
   }
 
   @override
-  Future<Results<User>> chackVerificationUser(){
-    return safeCall(()async{
+  Future<Results<User>> checkVerificationUser() {
+    return safeCall(() async {
       await _firebaseAuth.currentUser!.reload();
       User user = _firebaseAuth.currentUser!;
-      if(user.emailVerified) {
+      if (user.emailVerified) {
         return Success(data: user);
       } else {
-        return Failure(exception: NotVerifiedEmailException(), message: NotVerifiedEmailException().message);
-      }});
+        return Failure(
+          exception: NotVerifiedEmailException(),
+          message: NotVerifiedEmailException().message,
+        );
+      }
+    });
   }
 
-
+  @override
+  Future<Results<void>> sendPasswordResetEmail(String email) async {
+    return safeCall(() async {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return Success();
+    });
+  }
 }

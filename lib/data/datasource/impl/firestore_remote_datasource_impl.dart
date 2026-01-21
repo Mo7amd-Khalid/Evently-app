@@ -22,4 +22,12 @@ class FirestoreRemoteDatasourceImpl implements FirestoreRemoteDatasource{
     });
   }
 
+  @override
+  Future<Results<QuerySnapshot<Map<String, dynamic>>>> getUsers() async{
+    return safeCall(()async{
+      var response = await _firestore.collection(AppConstant.userCollection).get();
+      return Success(data: response);
+    });
+  }
+
 }

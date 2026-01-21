@@ -59,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
           {
             Navigator.pushNamed(context, Routes.register);
           }
+        case NavigateToForgetPasswordScreen():
+          {
+            Navigator.pushNamed(context, Routes.forgetPassword);
+          }
       }
     });
   }
@@ -129,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                               onPressed: () {
-                                // todo forgetPassword
+                                loginCubit.doAction(GoToForgetPasswordScreen());
                               },
                               child: Text(
                                 locale.forgetPassword,

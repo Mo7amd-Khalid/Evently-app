@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/core/constant/app_constant.dart';
 import 'package:evently/core/utils/app_exeptions.dart';
 import 'package:evently/data/datasource/contract/auth_remote_datasource.dart';
 import 'package:evently/data/datasource/contract/firestore_remote_datasource.dart';
@@ -89,7 +91,7 @@ class AuthRepoImpl implements AuthRepository {
 
   @override
   Future<Results<User>> chackVerificationUser() async{
-    var response = await _authRemoteDatasource.chackVerificationUser();
+    var response = await _authRemoteDatasource.checkVerificationUser();
     switch (response) {
       case Success<User>():{
         await _firestoreRemoteDatasource.storeUserDataToUserCollection(response.data!);
@@ -97,6 +99,30 @@ class AuthRepoImpl implements AuthRepository {
       }
       case Failure<User>():
         return Failure(exception: response.exception, message: response.message);
+    }
+  }
+
+  @override
+  Future<Results<void>> sendPasswordResetEmail(String email) async{
+    var response = await _firestoreRemoteDatasource.getUsers();
+    switch (response) {
+      case Success<QuerySnapshot<Map<String, dynamic>>>():
+        {
+          for(QueryDocumentSnapshot document in response.data!.docs)
+            {
+              if(document[AppConstant.emailKey] == email)
+                {
+                  print(email);
+                  await _authRemoteDatasource.sendPasswordResetEmail(email);
+                  return Success();
+                }
+            }
+          return Failure(exception: UserNotFoundException(), message: UserNotFoundException().message);
+        }
+      case Failure<QuerySnapshot<Map<String, dynamic>>>():
+        {
+          return Failure(exception: response.exception, message: response.message);
+        }
     }
   }
 

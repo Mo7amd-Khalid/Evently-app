@@ -27,6 +27,10 @@ class LoginCubit extends BaseCubit<LoginState, LoginAction, LoginNavigation> {
         {
           _visibilityOfPassword();
         }
+      case GoToForgetPasswordScreen():
+        {
+          _goToForgetPasswordScreen();
+        }
     }
   }
 
@@ -59,5 +63,9 @@ class LoginCubit extends BaseCubit<LoginState, LoginAction, LoginNavigation> {
 
   void _goToRegisterScreen() {
     emitNavigation(NavigateToRegisterScreen());
+  }
+
+  void _goToForgetPasswordScreen() {
+    emitNavigation(NavigateToForgetPasswordScreen());
   }
 }

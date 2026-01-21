@@ -106,7 +106,7 @@
   "eventDeletedSuccessfully": "Event Deleted Successfully",
   "resetPasswordDone": "Reset Password Done Successfully",
   "resetPasswordFailed": "Reset Password Not Done Successfully",
-  "checkYourMailToResetPassword": "Check your mail to reset password",
+  "checkYourMailToResetPassword": "Reset password email sent. Please check your email and make a new password from this link",
 
   "updateEvent" : "Update Event",
   "eventUpdatedSuccessfully" : "Event Updated Successfully",

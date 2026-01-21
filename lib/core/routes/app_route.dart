@@ -1,4 +1,5 @@
 import 'package:evently/core/routes/routes.dart';
+import 'package:evently/presentation/forget_password/forget_password_screen.dart';
 import 'package:evently/presentation/setup/setup_screen.dart';
 import 'package:evently/presentation/login/login_screen.dart';
 import 'package:evently/presentation/onboarding/onboarding_screen.dart';
@@ -30,6 +31,11 @@ abstract class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => LoginScreen(),
+        );
+      case Routes.forgetPassword:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => ForgetPasswordScreen(),
         );
       case Routes.register:
         return MaterialPageRoute(

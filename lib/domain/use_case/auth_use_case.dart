@@ -30,5 +30,8 @@ class AuthUseCase {
     return _authRepository.chackVerificationUser();
   }
 
+  Future<Results<void>> sendPasswordResetEmail(String email){
+    return _authRepository.sendPasswordResetEmail(email);
+  }
 
 }
