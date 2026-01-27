@@ -8,6 +8,7 @@ abstract interface class AuthRepository {
   Future<void> sendVerificationEmail();
   Future<Results<User>> chackVerificationUser();
   Future<Results<void>> sendPasswordResetEmail(String email);
+  Future<Results<User>> getUserData();
 
 
 }

@@ -8,5 +8,6 @@ abstract interface class AuthRemoteDatasource {
   Future<void> sendVerificationEmail();
   Future<Results<User>> checkVerificationUser();
   Future<Results<void>> sendPasswordResetEmail(String email);
+  Future<Results<User>> getUserData();
 
 }

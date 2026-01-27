@@ -59,6 +59,5 @@ abstract class AppExceptionMapper {
         return const UnknownFirestoreException();
     }
   }
-
 }
 

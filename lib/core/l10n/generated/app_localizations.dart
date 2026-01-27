@@ -548,6 +548,12 @@ abstract class AppLocalizations {
   /// **'The Title is required'**
   String get titleRequired;
 
+  /// No description provided for @locationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'The Location is required'**
+  String get locationRequired;
+
   /// No description provided for @descriptionRequired.
   ///
   /// In en, this message translates to:
@@ -679,6 +685,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit Event'**
   String get editEvent;
+
+  /// No description provided for @accessLocationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We need access to your location to show your current location on the map.'**
+  String get accessLocationMessage;
 }
 
 class _AppLocalizationsDelegate

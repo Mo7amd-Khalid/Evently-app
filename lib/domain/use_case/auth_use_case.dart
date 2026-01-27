@@ -34,4 +34,8 @@ class AuthUseCase {
     return _authRepository.sendPasswordResetEmail(email);
   }
 
+  Future<Results<User>> getUserData(){
+    return _authRepository.getUserData();
+  }
+
 }

@@ -73,4 +73,16 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       return Success();
     });
   }
+
+  @override
+  Future<Results<User>> getUserData() {
+    return safeCall(()async{
+      var response = _firebaseAuth.currentUser;
+      if(response == null)
+        {
+          return Failure(exception: UserNotFoundException(), message: UserNotFoundException().message);
+        }
+      return Success(data: response);
+    });
+  }
 }

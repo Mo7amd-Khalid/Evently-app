@@ -38,7 +38,7 @@ class SetupCubit extends BaseCubit<SetupState, SetupAction, SetupNavigation>{
   }
 
   Future<void> _goToOnboardingScreen() async{
-    await _useCase.saveDataInSharedPreferences(AppConstant.setupKey, true);
+    await _useCase.saveDataInSharedPreferences(KeysConstant.setupKey, true);
     emitNavigation(NavigateToOnboardingScreen());
   }
 

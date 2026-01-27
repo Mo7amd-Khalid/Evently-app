@@ -85,6 +85,7 @@
 
 
   "titleRequired": "The Title is required",
+  "locationRequired": "The Location is required",
   "descriptionRequired": "The Description is required",
   "timeRequired": "The Time is required",
   "dateRequired": "The Date is required",
@@ -110,7 +111,8 @@
 
   "updateEvent" : "Update Event",
   "eventUpdatedSuccessfully" : "Event Updated Successfully",
-  "editEvent" : "Edit Event"
+  "editEvent" : "Edit Event",
+  "accessLocationMessage": "We need access to your location to show your current location on the map."
 
 
 }

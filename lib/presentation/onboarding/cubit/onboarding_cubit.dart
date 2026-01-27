@@ -28,7 +28,7 @@ class OnboardingCubit extends BaseCubit<OnboardingState, OnboardingActions, Onbo
   }
 
   Future<void> _goToLoginScreen() async{
-    await _useCase.saveDataInSharedPreferences(AppConstant.onboardingKey, true);
+    await _useCase.saveDataInSharedPreferences(KeysConstant.onboardingKey, true);
     emitNavigation(NavigateToLoginScreen());
   }
 
