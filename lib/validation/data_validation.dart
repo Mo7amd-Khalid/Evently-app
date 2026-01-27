@@ -1,10 +1,11 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
+
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 
 class DataValidation{
   static String? nameValidation(String value, AppLocalizations locale){
     if (value.isEmpty) {
       return locale.nameRequired;
-    } else if (!RegExp(r'^[A-Za-z\u0600-\u06FF ]+$').hasMatch(value)) {
+    } else if (!RegExp(r'^(?=.{3,}$)[A-Za-z\u0600-\u06FF ]+$').hasMatch(value)) {
       return locale.nameInvalid;
     }
     return null;
@@ -23,7 +24,7 @@ class DataValidation{
   static String? passwordValidation(String value, AppLocalizations locale){
     if (value.isEmpty) {
       return locale.passwordRequired;
-    } else if (!RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$').hasMatch(value)) {
+    } else if (!RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$').hasMatch(value)) {
       return locale.passwordInvalid;
     }
     return null;

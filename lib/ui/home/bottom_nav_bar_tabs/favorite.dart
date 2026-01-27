@@ -1,10 +1,10 @@
-import 'package:evently/l10n/generated/app_localizations.dart';
-import 'package:evently/modules/event_dm.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
+import 'package:evently/data/models/event_dm.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
 import 'package:flutter/material.dart';
 
 import '../../firebase/event_firebase.dart';
-import '../../wigdets/event_card.dart';
+import '../../../presentation/widgets/event_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
   FavoriteScreen({super.key});

@@ -1,15 +1,14 @@
 import 'dart:io';
 
-import 'package:evently/l10n/generated/app_localizations.dart';
+import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/provider/app_config_provider.dart';
-import 'package:evently/ui/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
+import '../../../core/routes/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../firebase/firebase_auth_services.dart';
-import '../../wigdets/app_dialogs.dart';
+import '../../../presentation/widgets/app_dialogs.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -22,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
     var locale = AppLocalizations.of(context)!;
-    var provider = Provider.of<AppConfigProvider>(context);
+    //var provider = Provider.of<AppConfigProvider>(context);
     print(profileImage.value);
     return Column(
       children: [
@@ -105,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                         locale.language,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: provider.isDark()? AppColors.white:AppColors.black),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.black),
                     ),
                     SizedBox(height: 10,),
                     // language drop down
@@ -131,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
 
                         ),
                       ),
-                      value: provider.isEN()?locale.en:locale.ar,
+                      initialValue: locale.en,
                       isExpanded: true,
                       icon: Icon(Icons.keyboard_arrow_down_outlined,color: Theme.of(context).colorScheme.primary,),
                       focusColor: Theme.of(context).colorScheme.primary,
@@ -142,13 +141,13 @@ class ProfileScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge
                           ))).toList(),
                         onChanged: (value){
-                        provider.changeLocale(value==locale.en?"en":"ar");
+                        //provider.changeLocale(value==locale.en?"en":"ar");
                         }),
                     SizedBox(height: 20,),
                     // theme drop down
                     Text(
                       locale.theme,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: provider.isDark()? AppColors.white:AppColors.black),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.black),
                     ),
                     SizedBox(height: 10,),
                     // theme drop down
@@ -174,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
 
                           ),
                         ),
-                        value: provider.isDark()?ThemeMode.dark:ThemeMode.light,
+                        initialValue: ThemeMode.light,
                         isExpanded: true,
                         icon: Icon(Icons.keyboard_arrow_down_outlined,color: Theme.of(context).colorScheme.primary,),
                         focusColor: Theme.of(context).colorScheme.primary,
@@ -185,7 +184,7 @@ class ProfileScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleLarge
                             ))).toList(),
                         onChanged: (value){
-                          provider.changeTheme(value??ThemeMode.light);
+                          //provider.changeTheme(value??ThemeMode.light);
                         }),
 
 
@@ -209,7 +208,7 @@ class ProfileScreen extends StatelessWidget {
                 );
                 FirebaseAuthServices.logout().then((e){
                   Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                  Navigator.pushReplacementNamed(context, Routes.login);
                 }).onError((error,_){
                   Navigator.pop(context);
                   AppDialogs.actionDialog(
