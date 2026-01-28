@@ -3,6 +3,7 @@ import 'package:evently/core/constant/app_constant.dart';
 import 'package:evently/core/utils/app_exeptions.dart';
 import 'package:evently/data/datasource/contract/auth_remote_datasource.dart';
 import 'package:evently/data/datasource/contract/firestore_remote_datasource.dart';
+import 'package:evently/data/datasource/contract/local_datasource.dart';
 import 'package:evently/data/network/results.dart';
 import 'package:evently/domain/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,10 +11,11 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepoImpl implements AuthRepository {
+  final LocalDatasource _localDatasource;
   final AuthRemoteDatasource _authRemoteDatasource;
   final FirestoreRemoteDatasource _firestoreRemoteDatasource;
 
-  AuthRepoImpl(this._authRemoteDatasource, this._firestoreRemoteDatasource);
+  AuthRepoImpl(this._authRemoteDatasource, this._firestoreRemoteDatasource, this._localDatasource);
 
   @override
   Future<Results<User?>> login({
@@ -26,6 +28,7 @@ class AuthRepoImpl implements AuthRepository {
       case Success<User?>():
         {
           if (response.data!.emailVerified) {
+            await _localDatasource.saveInSharedPreferences(KeysConstant.loginKey, true);
             return Success(data: response.data, message: response.message);
           } else {
             response.data!.delete();
@@ -110,7 +113,7 @@ class AuthRepoImpl implements AuthRepository {
         {
           for(QueryDocumentSnapshot document in response.data!.docs)
             {
-              if(document[AppConstant.emailKey] == email)
+              if(document[KeysConstant.emailKey] == email)
                 {
                   print(email);
                   await _authRemoteDatasource.sendPasswordResetEmail(email);
@@ -123,6 +126,18 @@ class AuthRepoImpl implements AuthRepository {
         {
           return Failure(exception: response.exception, message: response.message);
         }
+    }
+  }
+
+  @override
+  Future<Results<User>> getUserData() async{
+    var response = await _authRemoteDatasource.getUserData();
+    switch (response) {
+
+      case Success<User>():
+        return Success(data: response.data);
+      case Failure<User>():
+        return Failure(exception: response.exception, message: response.message);
     }
   }
 

@@ -1,10 +1,12 @@
 import 'package:evently/core/routes/routes.dart';
+import 'package:evently/presentation/event_management/event_management_screen.dart';
 import 'package:evently/presentation/forget_password/forget_password_screen.dart';
+import 'package:evently/presentation/select_location/select_location.dart';
 import 'package:evently/presentation/setup/setup_screen.dart';
 import 'package:evently/presentation/login/login_screen.dart';
 import 'package:evently/presentation/onboarding/onboarding_screen.dart';
 import 'package:evently/presentation/register/register_screen.dart';
-import 'package:evently/ui/home/main_screen.dart';
+import 'package:evently/presentation/main/main_screen.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 
@@ -47,6 +49,18 @@ abstract class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => MainScreen(),
+        );
+
+      case Routes.eventManagement:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => EventManagementScreen(),
+        );
+
+      case Routes.selectLocation:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => SelectLocation(),
         );
 
       default:

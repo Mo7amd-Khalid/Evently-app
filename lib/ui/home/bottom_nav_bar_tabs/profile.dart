@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
     var locale = AppLocalizations.of(context)!;
-    var provider = Provider.of<AppConfigProvider>(context);
+    //var provider = Provider.of<AppConfigProvider>(context);
     print(profileImage.value);
     return Column(
       children: [
@@ -104,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                         locale.language,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: provider.isDark()? AppColors.white:AppColors.black),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.black),
                     ),
                     SizedBox(height: 10,),
                     // language drop down
@@ -130,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
 
                         ),
                       ),
-                      initialValue: provider.isEN()?locale.en:locale.ar,
+                      initialValue: locale.en,
                       isExpanded: true,
                       icon: Icon(Icons.keyboard_arrow_down_outlined,color: Theme.of(context).colorScheme.primary,),
                       focusColor: Theme.of(context).colorScheme.primary,
@@ -141,13 +141,13 @@ class ProfileScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge
                           ))).toList(),
                         onChanged: (value){
-                        provider.changeLocale(value==locale.en?"en":"ar");
+                        //provider.changeLocale(value==locale.en?"en":"ar");
                         }),
                     SizedBox(height: 20,),
                     // theme drop down
                     Text(
                       locale.theme,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: provider.isDark()? AppColors.white:AppColors.black),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.black),
                     ),
                     SizedBox(height: 10,),
                     // theme drop down
@@ -173,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
 
                           ),
                         ),
-                        initialValue: provider.isDark()?ThemeMode.dark:ThemeMode.light,
+                        initialValue: ThemeMode.light,
                         isExpanded: true,
                         icon: Icon(Icons.keyboard_arrow_down_outlined,color: Theme.of(context).colorScheme.primary,),
                         focusColor: Theme.of(context).colorScheme.primary,
@@ -184,7 +184,7 @@ class ProfileScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleLarge
                             ))).toList(),
                         onChanged: (value){
-                          provider.changeTheme(value??ThemeMode.light);
+                          //provider.changeTheme(value??ThemeMode.light);
                         }),
 
 

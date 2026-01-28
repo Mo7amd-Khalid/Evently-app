@@ -241,6 +241,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get titleRequired => 'العنوان مطلوب';
 
   @override
+  String get locationRequired => 'الموقع مطلوب';
+
+  @override
   String get descriptionRequired => 'الوصف مطلوب';
 
   @override
@@ -306,4 +309,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get editEvent => 'تعديل الحدث';
+
+  @override
+  String get accessLocationMessage =>
+      'نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة.';
 }

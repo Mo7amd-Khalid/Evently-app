@@ -47,5 +47,10 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+
+		<key>NSLocationWhenInUseUsageDescription</key>
+        <string>We need your location to show you on the map and provide relevant services.</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>We need your location to provide services even when the app is in the background.</string>
 	</dict>
 </plist>

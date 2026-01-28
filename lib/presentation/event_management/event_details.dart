@@ -1,14 +1,14 @@
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/data/models/event_dm.dart';
+import 'package:evently/presentation/event_management/event_management_screen.dart';
 import 'package:evently/provider/app_config_provider.dart';
 import 'package:evently/ui/firebase/event_firebase.dart';
-import 'package:evently/ui/home/main_screen.dart';
+import 'package:evently/presentation/main/main_screen.dart';
 import 'package:evently/presentation/widgets/app_dialogs.dart';
 import 'package:evently/core/utils/int_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/theme/app_colors.dart';
-import 'event_management_screen.dart';
+import '../../core/theme/app_colors.dart';
 
 class EventDetails extends StatelessWidget {
   static const String routeName = "Event Details";

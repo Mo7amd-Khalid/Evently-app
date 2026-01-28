@@ -10,6 +10,10 @@ class EventDM{
   int date;
   int time;
   List<String>? favUsers;
+  String address;
+  double latitude;
+  double longitude;
+
 
   EventDM({
     required this.id,
@@ -18,6 +22,9 @@ class EventDM{
     required this.category,
     required this.date,
     required this.time,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
     this.favUsers
 });
 
@@ -33,7 +40,10 @@ class EventDM{
       date: data["date"],
       description: data["description"],
       time: data["time"],
+      address: data["address"],
       favUsers: ((data["favUsers"]??[]) as List<dynamic>).map((e)=> e.toString()).toList(),
+      latitude: data["latitude"],
+      longitude: data["longitude"],
     );
   }
 
@@ -45,7 +55,10 @@ class EventDM{
       "date" : date,
       "description" : description,
       "time" : time,
+      "address" : address,
       "favUsers" : favUsers??[],
+      "latitude" : latitude,
+      "longitude" : longitude,
     };
   }
 

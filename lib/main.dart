@@ -14,19 +14,22 @@ import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
-  SharedPreferences preferences = getIt();
-  var onboardingStatus = preferences.get(AppConstant.onboardingKey);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp(onboardingStatus: onboardingStatus as bool?,));
+  await configureDependencies();
+  SharedPreferences preferences = getIt();
+  var onboardingStatus = preferences.get(KeysConstant.onboardingKey);
+  var loginStatus = preferences.get(KeysConstant.loginKey);
+  runApp(MyApp(onboardingStatus: onboardingStatus as bool?,loginStatus: loginStatus as bool?,));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({required this.onboardingStatus, super.key});
+  MyApp({required this.onboardingStatus,required this.loginStatus, super.key});
   final SetupCubit cubit = getIt();
   final bool? onboardingStatus;
+  final bool? loginStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +45,25 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: state.mode,
           onGenerateRoute: AppRouter.generateRoute,
-          initialRoute: onboardingStatus == true ? Routes.login : Routes.setup,
+          initialRoute: initialRoute(onboardingStatus ?? false, loginStatus ?? false),
         ),
       ),
     );
   }
 }
 
+String initialRoute(bool onboardingStatus, bool loginStatus){
+  if(onboardingStatus == false){
+    return Routes.setup;
+  }
+  else {
+    if(loginStatus)
+      {
+        return Routes.main;
+      }
+    else
+      {
+        return Routes.login;
+      }
+  }
+}

@@ -241,6 +241,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get titleRequired => 'The Title is required';
 
   @override
+  String get locationRequired => 'The Location is required';
+
+  @override
   String get descriptionRequired => 'The Description is required';
 
   @override
@@ -306,4 +309,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editEvent => 'Edit Event';
+
+  @override
+  String get accessLocationMessage =>
+      'We need access to your location to show your current location on the map.';
 }
