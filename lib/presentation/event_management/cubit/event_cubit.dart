@@ -4,16 +4,14 @@ import 'package:evently/data/models/event_dm.dart';
 import 'package:evently/data/network/results.dart';
 import 'package:evently/domain/use_case/use_case.dart';
 import 'package:evently/presentation/event_management/cubit/event_contract.dart';
-import 'package:evently/presentation/select_location/cubit/google_map_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class EventCubit extends BaseCubit<EventState, EventAction, EventNavigation> {
-  EventCubit(this._eventlyUseCase, this._googleMapCubit) : super(EventState());
+  EventCubit(this._eventlyUseCase) : super(EventState());
 
   final EventlyUseCase _eventlyUseCase;
-  final GoogleMapCubit _googleMapCubit;
 
 
   @override
@@ -25,6 +23,12 @@ class EventCubit extends BaseCubit<EventState, EventAction, EventNavigation> {
         _goToMapScreen();
       case AddEvent():
         _addEvent(action.event, action.context);
+      case DeleteEvent():
+        _deleteEvent(action.eventID);
+      case GoToHomeScreen():
+        _goToHomeScreen();
+      case UpdateEvent():
+        _updateEvent(action.event, action.context);
     }
   }
 
@@ -43,13 +47,44 @@ class EventCubit extends BaseCubit<EventState, EventAction, EventNavigation> {
       case Success<void>():
         emitNavigation(ShowInfoDialog(response.message!));
         emit(state.copyWith(statusMessage: Resources.success(message: response.message)));
-        _googleMapCubit.state.selectedLocation = null;
-        _googleMapCubit.state.latLngOfSelectedLocation = null;
       case Failure<void>():
-        emitNavigation(ShowInfoDialog(response.message));
+        emitNavigation(ShowErrorDialog(response.message));
         emit(state.copyWith(statusMessage: Resources.failure(
             exception: response.exception, message: response.message)));
     }
   }
+
+  Future<void> _updateEvent(EventDM event, BuildContext context) async{
+    emitNavigation(ShowLoadingDialog());
+    var response = await _eventlyUseCase.updateEvent(event, context);
+    switch(response)
+        {
+      case Success<void>():
+        emitNavigation(ShowInfoDialog(response.message!));
+      case Failure<void>():
+        emitNavigation(ShowInfoDialog("Event Updated Successfully"));
+    }
+  }
+
+  Future<void> _deleteEvent(String eventID) async{
+    emitNavigation(ShowLoadingDialog());
+    var response = await _eventlyUseCase.deleteEvent(eventID);
+    switch (response) {
+
+      case Success<void>():
+        emit(state.copyWith(statusMessage: Resources.success(message: response.message!)));
+        emitNavigation(ShowInfoDialog(response.message!));
+      case Failure<void>():
+        emit(state.copyWith(statusMessage: Resources.failure(exception: response.exception, message: response.message)));
+        emitNavigation(ShowInfoDialog(response.message));
+    }
+  }
+
+  void _goToHomeScreen() {
+    emitNavigation(NavigateToHomeScreen());
+  }
+
+
+
 
 }

@@ -1,19 +1,17 @@
+import 'package:evently/core/routes/routes.dart';
 import 'package:evently/data/models/event_dm.dart';
-import 'package:evently/ui/firebase/event_firebase.dart';
 import 'package:evently/ui/firebase/firebase_auth_services.dart';
 import 'package:evently/core/utils/int_extention.dart';
 import 'package:flutter/material.dart';
 
-import '../event_management/event_details.dart';
-
 class EventCart extends StatelessWidget {
-  EventCart({required this.event,super.key});
+  const EventCart({required this.event,super.key});
   final EventDM event;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, EventDetails.routeName,arguments: event);
+        Navigator.pushNamed(context, Routes.eventDetails,arguments: event);
       },
       child: AspectRatio(
         aspectRatio: 361/203,
@@ -60,7 +58,7 @@ class EventCart extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: ()async{
-                        await EventManagementFirebase.addEventToFav(event);
+                        //await EventManagementFirebase.addEventToFav(event);
                       },
                       child: Icon(
                         size: 26,

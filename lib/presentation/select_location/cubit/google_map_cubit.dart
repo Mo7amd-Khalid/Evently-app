@@ -50,21 +50,18 @@ class GoogleMapCubit
     emit(state.copyWith(isLoading: true, currentLocation: null));
     PermissionStatus status = await Permission.location.request();
     if (status.isGranted) {
-      Position currentLocation = await GeolocatorPlatform.instance
-          .getCurrentPosition(
+      Position currentLocation = await GeolocatorPlatform.instance.getCurrentPosition(
             locationSettings: LocationSettings(
               accuracy: LocationAccuracy.medium,
             ),
           );
-      emit(
-        state.copyWith(
-          isGranted: true,
-          currentLocation: LatLng(
-            currentLocation.latitude,
-            currentLocation.longitude,
-          ),
-        ),
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        currentLocation.latitude,
+        currentLocation.longitude,
       );
+      String theCountryAndCity = "${placemarks.first.country}, ${placemarks.first.locality}";
+      emit(state.copyWith(isGranted: true, currentLocation: LatLng(currentLocation.latitude,currentLocation.longitude,
+          ), theCountryAndCity: theCountryAndCity),);
     } else {
       emitNavigation(
         ShowDialog(

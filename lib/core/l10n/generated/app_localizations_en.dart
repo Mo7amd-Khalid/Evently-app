@@ -313,4 +313,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get accessLocationMessage =>
       'We need access to your location to show your current location on the map.';
+
+  @override
+  String get noEventToShow => 'There is no events to show the location of them';
 }

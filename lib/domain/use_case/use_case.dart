@@ -23,5 +23,17 @@ class EventlyUseCase {
   }
 
 
+  Future<Results<List<EventDM>>> getEvents(int categoryID) async{
+    return _repoImpl.getEvents(categoryID);
+  }
+
+  Future<Results<void>> deleteEvent(String eventID) async{
+    return _repoImpl.deleteEvent(eventID);
+  }
+
+  Future<Results<void>> updateEvent(EventDM event, BuildContext context) async{
+    return _repoImpl.updateEvent(event, context);
+  }
+
 
 }

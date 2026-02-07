@@ -1,8 +1,10 @@
 import 'package:evently/core/di/di.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/core/routes/routes.dart';
+import 'package:evently/core/theme/app_colors.dart';
 import 'package:evently/core/utils/context_func.dart';
 import 'package:evently/core/utils/white_spaces.dart';
+import 'package:evently/data/models/event_dm.dart';
 import 'package:evently/presentation/event_management/cubit/event_contract.dart';
 import 'package:evently/presentation/event_management/cubit/event_cubit.dart';
 import 'package:evently/presentation/select_location/cubit/google_map_contract.dart';
@@ -13,47 +15,63 @@ import 'package:evently/validation/data_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import '../../core/theme/app_colors.dart';
-import '../../data/models/event_dm.dart';
 
-class EventManagementScreen extends StatefulWidget {
-  final EventDM? eventNeedToUpdate;
+class EditEventScreen extends StatefulWidget {
+  const EditEventScreen({super.key, required this.event});
 
-  const EventManagementScreen({super.key, this.eventNeedToUpdate});
+  final EventDM event;
 
   @override
-  State<EventManagementScreen> createState() => _EventManagementScreenState();
+  State<EditEventScreen> createState() => _EditEventScreenState();
 }
 
-class _EventManagementScreenState extends State<EventManagementScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  DateTime? selectedDate;
-  TimeOfDay? selectedTime;
+class _EditEventScreenState extends State<EditEventScreen> {
   EventCubit eventCubit = getIt();
   SetupCubit setupCubit = getIt();
   GoogleMapCubit googleMapCubit = getIt();
 
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  DateTime? date;
+  TimeOfDay? time;
+
   @override
   void initState() {
     super.initState();
+    googleMapCubit.state.selectedLocation = null;
+    googleMapCubit.state.latLngOfSelectedLocation = null;
+    eventCubit.doAction(ChangeSelectedCategory(widget.event.category.id));
+    titleController.text = widget.event.title;
+    descriptionController.text = widget.event.description;
+    date = DateTime.fromMillisecondsSinceEpoch(widget.event.date);
+    time = TimeOfDay.fromDateTime(
+      DateTime.fromMillisecondsSinceEpoch(widget.event.time),
+    );
     eventCubit.navigation.listen((navigationState) {
       switch (navigationState) {
         case NavigateToMapScreen():
-          {
-            Navigator.pushNamed(context, Routes.selectLocation);
-          }
+          Navigator.pushNamed(context, Routes.selectLocation);
+        case NavigateToHomeScreen():
+          Navigator.pushReplacementNamed(context, Routes.main);
         case ShowLoadingDialog():
           AppDialogs.loadingDialog(
             context: context,
-            loadingMessage: AppLocalizations.of(context)!.loading,
+            loadingMessage: context.locale!.loading,
           );
         case ShowInfoDialog():
-          Navigator.pop(context);
           AppDialogs.actionDialog(
             context: context,
             content: navigationState.message,
-            posActionTitle: AppLocalizations.of(context)!.ok,
+            posActionTitle: context.locale!.ok,
+            posAction: () {
+              eventCubit.doAction(GoToHomeScreen());
+            },
+          );
+        case ShowErrorDialog():
+          AppDialogs.actionDialog(
+            context: context,
+            content: navigationState.message,
+            posActionTitle: context.locale!.tryAgain,
           );
       }
     });
@@ -72,15 +90,16 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
             (_, state) => Scaffold(
               appBar: AppBar(
                 title: Text(
-                  widget.eventNeedToUpdate == null
-                      ? context.locale!.createEvent
-                      : context.locale!.editEvent,
+                  context.locale!.editEvent,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 centerTitle: true,
-                leading: IconButton(onPressed: (){
-                  Navigator.pop(context);
-                }, icon: Icon(Icons.arrow_back_ios)),
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios),
+                ),
               ),
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -90,11 +109,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                       borderRadius: BorderRadius.circular(16),
                       child: AspectRatio(
                         aspectRatio: 360 / 200,
-                        child: Image.asset(
-                          state
-                              .categoriesList[state.selectedCategoryIndex]
-                              .image,
-                        ),
+                        child: Image.asset(widget.event.category.image),
                       ),
                     ),
                     10.verticalSpace,
@@ -203,27 +218,22 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                         hintText: context.locale!.eventDescription,
                       ),
                     ),
-
                     Row(
                       children: [
                         Icon(Icons.calendar_month_outlined),
                         10.horizontalSpace,
-                        Text(
-                          selectedDate == null
-                              ? context.locale!.eventDate
-                              : DateFormat("dd/MM/yyyy").format(selectedDate!),
-                        ),
+                        Text(DateFormat("dd/MM/yyyy").format(date!)),
                         Spacer(),
                         TextButton(
                           onPressed: () {
                             showDatePicker(
                               context: context,
                               firstDate: DateTime.now(),
-                              initialDate: selectedDate ?? DateTime.now(),
+                              initialDate: date,
                               lastDate: DateTime.now().add(Duration(days: 365)),
                             ).then((dateValue) {
                               setState(() {
-                                selectedDate = dateValue;
+                                date = dateValue;
                               });
                             });
                           },
@@ -243,27 +253,19 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                         Icon(Icons.watch_later_outlined),
                         10.horizontalSpace,
                         Text(
-                          selectedTime == null
-                              ? context.locale!.eventTime
-                              : DateFormat("h:mm a").format(
-                                DateTime(
-                                  0,
-                                  0,
-                                  0,
-                                  selectedTime!.hour,
-                                  selectedTime!.minute,
-                                ),
-                              ),
+                          DateFormat(
+                            "h:mm a",
+                          ).format(DateTime(0, 0, 0, time!.hour, time!.minute)),
                         ),
                         Spacer(),
                         TextButton(
                           onPressed: () {
                             showTimePicker(
                               context: context,
-                              initialTime: selectedTime ?? TimeOfDay.now(),
+                              initialTime: time!,
                             ).then((value) {
                               setState(() {
-                                selectedTime = value;
+                                time = value;
                               });
                             });
                           },
@@ -308,13 +310,16 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                             ),
                           ),
                           BlocBuilder<GoogleMapCubit, GoogleMapState>(
-                            builder: (_, state) => Expanded(
-                              child: Text(
-                                state.selectedLocation ?? context.locale!.chooseEventLocation,
-                                style: Theme.of(context).textTheme.titleMedium,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
+                            builder:
+                                (_, state) => Expanded(
+                                  child: Text(
+                                    state.selectedLocation ??
+                                        widget.event.address,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                           ),
                           Icon(Icons.arrow_forward_ios),
                         ],
@@ -324,51 +329,37 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                     10.verticalSpace,
                     FilledButton(
                       onPressed: () {
-                        EventDM event;
-                        if (widget.eventNeedToUpdate == null) {
-                          event = EventDM(
-                            id: "",
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            category: state.categoriesList[state.selectedCategoryIndex],
-                            date: selectedDate!.millisecondsSinceEpoch,
-                            address: googleMapCubit.state.selectedLocation!,
-                            latitude: googleMapCubit.state.latLngOfSelectedLocation!.latitude,
-                            longitude: googleMapCubit.state.latLngOfSelectedLocation!.longitude,
-                            time:
-                                DateTime(
-                                  0,
-                                  0,
-                                  0,
-                                  selectedTime!.hour,
-                                  selectedTime!.minute,
-                                ).millisecondsSinceEpoch,
-                          );
-                        } else {
-                          event = EventDM(
-                            id: widget.eventNeedToUpdate!.id,
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            category: state.categoriesList[state.selectedCategoryIndex],
-                            date: selectedDate!.millisecondsSinceEpoch,
-                            address: googleMapCubit.state.selectedLocation ?? widget.eventNeedToUpdate!.address,
-                            latitude:googleMapCubit.state.latLngOfSelectedLocation?.latitude ?? widget.eventNeedToUpdate!.latitude,
-                            longitude: googleMapCubit.state.latLngOfSelectedLocation?.longitude ?? widget.eventNeedToUpdate!.longitude,
-                            time: DateTime(
-                                  0,
-                                  0,
-                                  0,
-                                  selectedTime!.hour,
-                                  selectedTime!.minute,
-                                ).millisecondsSinceEpoch,
-                          );
-                        }
-                        eventCubit.doAction(AddEvent(event, context));
+                        EventDM event = EventDM(
+                          id: widget.event.id,
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          category:
+                              state.categoriesList[state.selectedCategoryIndex],
+                          date: date!.millisecondsSinceEpoch,
+                          address: googleMapCubit.state.selectedLocation!,
+                          latitude:
+                              googleMapCubit
+                                  .state
+                                  .latLngOfSelectedLocation!
+                                  .latitude,
+                          longitude:
+                              googleMapCubit
+                                  .state
+                                  .latLngOfSelectedLocation!
+                                  .longitude,
+                          time:
+                              DateTime(
+                                0,
+                                0,
+                                0,
+                                time!.hour,
+                                time!.minute,
+                              ).millisecondsSinceEpoch,
+                        );
+                        eventCubit.doAction(UpdateEvent(event, context));
                       },
                       child: Text(
-                        widget.eventNeedToUpdate == null
-                            ? context.locale!.addEvent
-                            : context.locale!.updateEvent,
+                        context.locale!.editEvent,
                         style: Theme.of(
                           context,
                         ).textTheme.bodyLarge!.copyWith(color: AppColors.white),

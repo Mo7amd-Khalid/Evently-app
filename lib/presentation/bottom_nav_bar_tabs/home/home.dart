@@ -1,14 +1,16 @@
 import 'package:evently/core/di/di.dart';
+import 'package:evently/core/utils/context_func.dart';
+import 'package:evently/core/utils/resources.dart';
 import 'package:evently/presentation/bottom_nav_bar_tabs/home/cubit/home_contract.dart';
 import 'package:evently/presentation/bottom_nav_bar_tabs/home/cubit/home_cubit.dart';
+import 'package:evently/presentation/select_location/cubit/google_map_contract.dart';
+import 'package:evently/presentation/select_location/cubit/google_map_cubit.dart';
 import 'package:evently/presentation/setup/cubit/setup_cubit.dart';
 import 'package:evently/presentation/setup/cubit/setup_state.dart';
-import 'package:evently/ui/firebase/event_firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/theme/app_colors.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
-import '../../../ui/firebase/firebase_auth_services.dart';
 import '../../widgets/event_card.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -21,11 +23,14 @@ class HomeTabScreen extends StatefulWidget {
 class _HomeTabScreenState extends State<HomeTabScreen> {
   HomeCubit homeCubit = getIt();
   SetupCubit setupCubit = getIt();
+  GoogleMapCubit googleMapCubit = getIt();
 
   @override
   void initState() {
     super.initState();
+    googleMapCubit.doAction(GetPermissionOfLocation());
     homeCubit.doAction(GetUserData());
+    homeCubit.doAction(GetEvents(homeCubit.state.categoriesList[homeCubit.state.selectedCategoryIndex].id));
   }
 
   @override
@@ -34,6 +39,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       providers: [
         BlocProvider.value(value: homeCubit),
         BlocProvider.value(value: setupCubit),
+        BlocProvider.value(value: googleMapCubit),
       ],
       child: BlocBuilder<HomeCubit, HomeState>(
         builder:
@@ -45,7 +51,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
                     ),
-                    color: setupCubit.state.mode == ThemeMode.dark? AppColors.darkPurple : AppColors.purple
+                    color:
+                        setupCubit.state.mode == ThemeMode.dark
+                            ? AppColors.darkPurple
+                            : AppColors.purple,
                   ),
                   child: SafeArea(
                     child: Column(
@@ -84,13 +93,35 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                   Spacer(),
                                   IconButton(
                                     onPressed: () {
-                                      setupCubit.doAction(ChangeThemeMode(setupCubit.state.mode == ThemeMode.dark? ThemeMode.light : ThemeMode.dark));
+                                      setupCubit.doAction(
+                                        ChangeThemeMode(
+                                          setupCubit.state.mode ==
+                                                  ThemeMode.dark
+                                              ? ThemeMode.light
+                                              : ThemeMode.dark,
+                                        ),
+                                      );
                                     },
-                                    icon: setupCubit.state.mode == ThemeMode.dark ? Icon(Icons.dark_mode_outlined,color: AppColors.white,) : Icon(Icons.light_mode_outlined,color: AppColors.white,),
+                                    icon:
+                                        setupCubit.state.mode == ThemeMode.dark
+                                            ? Icon(
+                                              Icons.dark_mode_outlined,
+                                              color: AppColors.white,
+                                            )
+                                            : Icon(
+                                              Icons.light_mode_outlined,
+                                              color: AppColors.white,
+                                            ),
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      setupCubit.doAction(ChangeLanguage(setupCubit.state.language == "en" ? "ar" : "en"));
+                                      setupCubit.doAction(
+                                        ChangeLanguage(
+                                          setupCubit.state.language == "en"
+                                              ? "ar"
+                                              : "en",
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(8),
@@ -101,7 +132,11 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                       child: Text(
                                         setupCubit.state.language.toUpperCase(),
                                         style: TextStyle(
-                                          color: setupCubit.state.mode == ThemeMode.dark? AppColors.darkPurple : AppColors.purple
+                                          color:
+                                              setupCubit.state.mode ==
+                                                      ThemeMode.dark
+                                                  ? AppColors.darkPurple
+                                                  : AppColors.purple,
                                         ),
                                       ),
                                     ),
@@ -115,12 +150,14 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                     Icons.location_on_outlined,
                                     color: AppColors.white,
                                   ),
-                                  Text(
-                                    "Cairo, Egypt",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(color: AppColors.white),
+                                  BlocBuilder<GoogleMapCubit, GoogleMapState>(
+                                    builder: (_,state) => state.theCountryAndCity == null ? CircularProgressIndicator() : Text(
+                                      state.theCountryAndCity??"",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(color: AppColors.white),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -149,7 +186,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                         ),
                                         decoration: BoxDecoration(
                                           color:
-                                              state.categoriesList[state.selectedCategoryIndex] == category
+                                              state.categoriesList[state
+                                                          .selectedCategoryIndex] ==
+                                                      category
                                                   ? AppColors.lightBlue
                                                   : Colors.transparent,
                                           borderRadius: BorderRadius.circular(
@@ -166,7 +205,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                               Icon(
                                                 category.icon,
                                                 color:
-                                                state.categoriesList[state.selectedCategoryIndex] ==
+                                                    state.categoriesList[state
+                                                                .selectedCategoryIndex] ==
                                                             category
                                                         ? Theme.of(
                                                           context,
@@ -174,12 +214,16 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                                         : AppColors.white,
                                               ),
                                               Text(
-                                                setupCubit.state.language == "en" ? category.nameEN : category.nameAR,
+                                                setupCubit.state.language ==
+                                                        "en"
+                                                    ? category.nameEN
+                                                    : category.nameAR,
                                                 style: Theme.of(
                                                   context,
                                                 ).textTheme.bodyLarge!.copyWith(
                                                   color:
-                                                  state.categoriesList[state.selectedCategoryIndex] ==
+                                                      state.categoriesList[state
+                                                                  .selectedCategoryIndex] ==
                                                               category
                                                           ? Theme.of(
                                                             context,
@@ -200,33 +244,18 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                   ),
                 ),
                 Expanded(
-                  child: StreamBuilder(
-                    stream: EventManagementFirebase.getEventsData(
-                      state.categoriesList[state.selectedCategoryIndex].id,
-                    ),
-                    builder: (_, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasData) {
-                        var events =
-                            snapshot.data?.docs.map((e) => e.data()).toList() ??
-                            [];
-                        return ListView.separated(
-                          padding: EdgeInsets.all(16),
-                          itemBuilder:
-                              (context, index) =>
-                                  EventCart(event: events[index]),
-                          separatorBuilder:
-                              (context, index) => SizedBox(height: 10),
-                          itemCount: events.length,
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text(snapshot.error.toString()));
-                      } else {
-                        return SizedBox();
-                      }
-                    },
-                  ),
+                  child:
+                      state.events.state == Resources.loading() || state.events.data == null
+                          ? Center(child: CircularProgressIndicator())
+                          : state.events.data!.isEmpty? Center(child: Text(context.locale!.noEventToShow),) : ListView.separated(
+                            padding: EdgeInsets.all(16),
+                            itemBuilder:
+                                (context, index) =>
+                                    EventCart(event: state.events.data![index]),
+                            separatorBuilder:
+                                (context, index) => SizedBox(height: 10),
+                            itemCount: state.events.data!.length,
+                          ),
                 ),
               ],
             ),
