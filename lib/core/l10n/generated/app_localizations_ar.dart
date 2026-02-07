@@ -313,4 +313,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get accessLocationMessage =>
       'نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة.';
+
+  @override
+  String get noEventToShow => 'لا يوجد احداث للعرض';
 }

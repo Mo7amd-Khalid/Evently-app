@@ -105,14 +105,37 @@ class AddEvent extends EventAction {
 
   AddEvent(this.event, this.context);
 }
+class UpdateEvent extends EventAction {
+  EventDM event;
+  BuildContext context;
+
+  UpdateEvent(this.event, this.context);
+}
+
+class DeleteEvent extends EventAction{
+  String eventID;
+
+  DeleteEvent(this.eventID);
+}
+
+class GoToHomeScreen extends EventAction{}
+
+
 
 sealed class EventNavigation {}
 
 class NavigateToMapScreen extends EventNavigation {}
+
+class NavigateToHomeScreen extends EventNavigation {}
+
 
 class ShowLoadingDialog extends EventNavigation {}
 
 class ShowInfoDialog extends EventNavigation {
   String message;
   ShowInfoDialog(this.message);
+}
+class ShowErrorDialog extends EventNavigation {
+  String message;
+  ShowErrorDialog(this.message);
 }

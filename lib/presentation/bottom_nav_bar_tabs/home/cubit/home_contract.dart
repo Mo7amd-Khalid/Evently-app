@@ -1,10 +1,12 @@
 import 'package:evently/core/utils/resources.dart';
 import 'package:evently/data/models/category_dm.dart';
+import 'package:evently/data/models/event_dm.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeState {
   Resources<User> userData;
+  Resources<List<EventDM>> events;
   late List<CategoryDM> categoriesList = [
     CategoryDM(
       id: -1,
@@ -81,15 +83,18 @@ class HomeState {
 
   HomeState({
     this.userData = const Resources.initial(), this.selectedCategoryIndex = 0,
+    this.events = const Resources.initial(),
   });
 
   HomeState copyWith({
     Resources<User>? userData,
     int? selectedCategoryIndex,
+    Resources<List<EventDM>>? events,
   }) {
     return HomeState(
       userData: userData ?? this.userData,
       selectedCategoryIndex: selectedCategoryIndex ?? this.selectedCategoryIndex,
+      events: events ?? this.events
     );
   }
 }
@@ -101,5 +106,10 @@ class ChooseSelectedCategory extends HomeAction {
   int index;
   ChooseSelectedCategory(this.index);
 }
+class GetEvents extends HomeAction {
+  int categoryID;
+  GetEvents(this.categoryID);
+}
+
 
 sealed class HomeNavigation {}

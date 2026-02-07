@@ -9,4 +9,8 @@ abstract interface class FirestoreRemoteDatasource {
   Future<Results<void>> storeUserDataToUserCollection(User user);
   Future<Results<QuerySnapshot<Map<String, dynamic>>>> getUsers();
   Future<Results<void>> addEvent(EventDM event, BuildContext context);
+  Future<Results<void>> deleteEvent(String eventID);
+  Future<Results<List<EventDM>>> getEvents(int categoryID);
+  Future<Results<void>> updateEvent(EventDM event, BuildContext context);
+
 }

@@ -1,5 +1,4 @@
 import 'package:evently/core/di/di.dart';
-import 'package:evently/core/routes/routes.dart';
 import 'package:evently/core/theme/app_colors.dart';
 import 'package:evently/core/utils/context_func.dart';
 import 'package:evently/presentation/select_location/cubit/google_map_contract.dart';
@@ -23,6 +22,7 @@ class SelectLocationState extends State<SelectLocation> {
 
   @override
   void initState() {
+    super.initState();
     googleMapCubit.doAction(LoadGoogleMapStyle());
     googleMapCubit.doAction(GetPermissionOfLocation());
     googleMapCubit.navigation.listen((navigationState) {
@@ -41,10 +41,11 @@ class SelectLocationState extends State<SelectLocation> {
             );
           }
         case NavigateToEventManagementScreen():
-          Navigator.pop(context);
+          {
+            Navigator.pop(context);
+          }
       }
     });
-    super.initState();
   }
 
   @override

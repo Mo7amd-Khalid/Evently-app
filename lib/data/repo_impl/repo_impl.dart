@@ -48,6 +48,48 @@ class RepoImpl implements EventlyRepository {
       case Success<void>():
         return Success(message: response.message);
       case Failure<void>():
+        return Failure(
+          exception: response.exception,
+          message: response.message,
+        );
+    }
+  }
+
+  @override
+  Future<Results<List<EventDM>>> getEvents(int categoryID) async {
+    var response = await _remoteDatasource.getEvents(categoryID);
+    switch (response) {
+      case Success<List<EventDM>>():
+        return Success(data: response.data);
+      case Failure<List<EventDM>>():
+        return Failure(
+          exception: response.exception,
+          message: response.message,
+        );
+    }
+  }
+
+  @override
+  Future<Results<void>> deleteEvent(String eventID) async {
+    var response = await _remoteDatasource.deleteEvent(eventID);
+    switch (response) {
+      case Success<void>():
+        return Success(message: response.message);
+      case Failure<void>():
+        return Failure(
+          exception: response.exception,
+          message: response.message,
+        );
+    }
+  }
+
+  @override
+  Future<Results<void>> updateEvent(EventDM event, BuildContext context) async {
+    var response = await _remoteDatasource.updateEvent(event, context);
+    switch (response) {
+      case Success<void>():
+        return Success(message: response.message);
+      case Failure<void>():
         return Failure(exception: response.exception, message: response.message);
     }
   }

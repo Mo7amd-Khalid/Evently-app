@@ -23,6 +23,7 @@ import '../../data/datasource/impl/auth_remote_datasource_impl.dart' as _i939;
 import '../../data/datasource/impl/firestore_remote_datasource_impl.dart'
     as _i665;
 import '../../data/datasource/impl/local_datasource_impl.dart' as _i23;
+import '../../data/models/event_dm.dart' as _i668;
 import '../../data/repo_impl/auth_repo_impl.dart' as _i540;
 import '../../data/repo_impl/repo_impl.dart' as _i212;
 import '../../domain/repository/auth_repository.dart' as _i614;
@@ -50,8 +51,11 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final provideSharedPreferences = _$ProvideSharedPreferences();
     final provideFirebase = _$ProvideFirebase();
+    final provideSharedPreferences = _$ProvideSharedPreferences();
+    gh.factory<_i974.CollectionReference<_i668.EventDM>>(
+      () => provideFirebase.eventFirebase(),
+    );
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => provideSharedPreferences.provideShared(),
       preResolve: true,
@@ -68,7 +72,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i939.AuthRemoteDatasourceImpl(gh<_i59.FirebaseAuth>()),
     );
     gh.factory<_i725.FirestoreRemoteDatasource>(
-      () => _i665.FirestoreRemoteDatasourceImpl(gh<_i974.FirebaseFirestore>()),
+      () => _i665.FirestoreRemoteDatasourceImpl(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i974.CollectionReference<_i668.EventDM>>(),
+      ),
     );
     gh.factory<_i614.AuthRepository>(
       () => _i540.AuthRepoImpl(
@@ -89,7 +96,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i719.EventlyUseCase>(
       () => _i719.EventlyUseCase(gh<_i596.EventlyRepository>()),
     );
-    gh.factory<_i794.HomeCubit>(() => _i794.HomeCubit(gh<_i185.AuthUseCase>()));
+    gh.singleton<_i794.HomeCubit>(
+      () =>
+          _i794.HomeCubit(gh<_i185.AuthUseCase>(), gh<_i719.EventlyUseCase>()),
+    );
     gh.factory<_i101.LoginCubit>(
       () => _i101.LoginCubit(gh<_i185.AuthUseCase>()),
     );
@@ -105,19 +115,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i657.OnboardingCubit>(
       () => _i657.OnboardingCubit(gh<_i719.EventlyUseCase>()),
     );
+    gh.factory<_i763.EventCubit>(
+      () => _i763.EventCubit(gh<_i719.EventlyUseCase>()),
+    );
     gh.singleton<_i73.GoogleMapCubit>(
       () => _i73.GoogleMapCubit(gh<_i536.SetupCubit>()),
-    );
-    gh.factory<_i763.EventCubit>(
-      () => _i763.EventCubit(
-        gh<_i719.EventlyUseCase>(),
-        gh<_i73.GoogleMapCubit>(),
-      ),
     );
     return this;
   }
 }
 
-class _$ProvideSharedPreferences extends _i1041.ProvideSharedPreferences {}
-
 class _$ProvideFirebase extends _i743.ProvideFirebase {}
+
+class _$ProvideSharedPreferences extends _i1041.ProvideSharedPreferences {}

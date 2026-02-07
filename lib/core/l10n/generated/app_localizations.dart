@@ -691,6 +691,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We need access to your location to show your current location on the map.'**
   String get accessLocationMessage;
+
+  /// No description provided for @noEventToShow.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no events to show the location of them'**
+  String get noEventToShow;
 }
 
 class _AppLocalizationsDelegate
