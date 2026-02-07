@@ -542,6 +542,12 @@ abstract class AppLocalizations {
   /// **'Add Event'**
   String get addEvent;
 
+  /// No description provided for @requiredInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Information'**
+  String get requiredInformation;
+
   /// No description provided for @titleRequired.
   ///
   /// In en, this message translates to:
@@ -695,8 +701,32 @@ abstract class AppLocalizations {
   /// No description provided for @noEventToShow.
   ///
   /// In en, this message translates to:
-  /// **'There is no events to show the location of them'**
+  /// **'There is no events to show'**
   String get noEventToShow;
+
+  /// No description provided for @tabOnLocationToSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on the location to select'**
+  String get tabOnLocationToSelect;
+
+  /// No description provided for @locationPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Location Permission'**
+  String get locationPermission;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @allow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get allow;
 }
 
 class _AppLocalizationsDelegate

@@ -24,7 +24,7 @@ class EventCubit extends BaseCubit<EventState, EventAction, EventNavigation> {
       case AddEvent():
         _addEvent(action.event, action.context);
       case DeleteEvent():
-        _deleteEvent(action.eventID);
+        _deleteEvent(action.eventID,action.context);
       case GoToHomeScreen():
         _goToHomeScreen();
       case UpdateEvent():
@@ -62,13 +62,13 @@ class EventCubit extends BaseCubit<EventState, EventAction, EventNavigation> {
       case Success<void>():
         emitNavigation(ShowInfoDialog(response.message!));
       case Failure<void>():
-        emitNavigation(ShowInfoDialog("Event Updated Successfully"));
+        emitNavigation(ShowInfoDialog(response.message));
     }
   }
 
-  Future<void> _deleteEvent(String eventID) async{
+  Future<void> _deleteEvent(String eventID, BuildContext context) async{
     emitNavigation(ShowLoadingDialog());
-    var response = await _eventlyUseCase.deleteEvent(eventID);
+    var response = await _eventlyUseCase.deleteEvent(eventID, context);
     switch (response) {
 
       case Success<void>():

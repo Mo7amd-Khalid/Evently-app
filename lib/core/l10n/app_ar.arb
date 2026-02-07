@@ -87,6 +87,7 @@
   "addEvent": "إضافة الحدث",
 
 
+  "requiredInformation" : "بيانات مطلوبة",
   "titleRequired": "العنوان مطلوب",
   "locationRequired": "الموقع مطلوب",
   "descriptionRequired": "الوصف مطلوب",
@@ -118,7 +119,11 @@
 
   "editEvent" : "تعديل الحدث",
   "accessLocationMessage" : "نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة.",
-  "noEventToShow" : "لا يوجد احداث للعرض"
+  "noEventToShow" : "لا يوجد احداث للعرض",
+  "tabOnLocationToSelect" : "اضغط علي المكان لتختاره",
+  "locationPermission": "الإذن لتحديد الموقع",
+  "cancel" : "إلغاء",
+  "allow" : "سماح"
 
 
 

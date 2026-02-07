@@ -238,6 +238,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addEvent => 'Add Event';
 
   @override
+  String get requiredInformation => 'Required Information';
+
+  @override
   String get titleRequired => 'The Title is required';
 
   @override
@@ -315,5 +318,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'We need access to your location to show your current location on the map.';
 
   @override
-  String get noEventToShow => 'There is no events to show the location of them';
+  String get noEventToShow => 'There is no events to show';
+
+  @override
+  String get tabOnLocationToSelect => 'Tap on the location to select';
+
+  @override
+  String get locationPermission => 'Location Permission';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get allow => 'Allow';
 }

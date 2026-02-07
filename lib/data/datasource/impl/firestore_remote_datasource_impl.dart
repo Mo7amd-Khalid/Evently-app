@@ -48,22 +48,23 @@ class FirestoreRemoteDatasourceImpl implements FirestoreRemoteDatasource {
         errorMessage +=
             "\n${AppLocalizations.of(context)!.descriptionRequired}";
       }
-      if (event.address.isEmpty || event.longitude == -1 || event.latitude == -1) {
+      if (event.address.isEmpty ||
+          event.longitude == -1 ||
+          event.latitude == -1) {
         errorMessage += "\n${AppLocalizations.of(context)!.locationRequired}";
       }
-      if(event.date == -1)
-        {
-          errorMessage += "\n${AppLocalizations.of(context)!.dateRequired}";
-        }
-      if(event.time == -1)
-      {
+      if (event.date == -1) {
+        errorMessage += "\n${AppLocalizations.of(context)!.dateRequired}";
+      }
+      if (event.time == -1) {
         errorMessage += "\n${AppLocalizations.of(context)!.timeRequired}";
       }
       if (errorMessage.isEmpty) {
         var data = _eventFirebase.doc();
         event.id = data.id;
+        print(event.favUsers);
         await data.set(event);
-        return Success(message: "Event Added Successfully");
+        return Success(message: AppLocalizations.of(context)!.eventAddedSuccessfully);
       } else {
         return Failure(exception: Exception(), message: errorMessage);
       }
@@ -71,10 +72,10 @@ class FirestoreRemoteDatasourceImpl implements FirestoreRemoteDatasource {
   }
 
   @override
-  Future<Results<void>> deleteEvent(String eventID) async{
-    return safeCall(()async{
+  Future<Results<void>> deleteEvent(String eventID, BuildContext context) async {
+    return safeCall(() async {
       await _eventFirebase.doc(eventID).delete();
-      return Success(message: "Event Deleted Successfully");
+      return Success(message: AppLocalizations.of(context)!.eventDeletedSuccessfully);
     });
   }
 
@@ -101,12 +102,43 @@ class FirestoreRemoteDatasourceImpl implements FirestoreRemoteDatasource {
   }
 
   @override
-  Future<Results<void>> updateEvent(EventDM event, BuildContext context) async{
-    return safeCall(()async{
+  Future<Results<void>> updateEvent(EventDM event, BuildContext context) async {
+    return safeCall(() async {
       await _eventFirebase.doc(event.id).update(event.toFirestore());
-      return Success(message: AppLocalizations.of(context)!.eventUpdatedSuccessfully);
+      return Success(
+        message: AppLocalizations.of(context)!.eventUpdatedSuccessfully,
+      );
     });
   }
 
+  @override
+  Future<Results<List<EventDM>>> updateFavUserList(
+    String userID,
+    EventDM event,
+  ) {
+    return safeCall(() async {
+      if (event.favUsers!.contains(userID)) {
+        (event.favUsers ?? []).remove(userID);
+      } else {
+        (event.favUsers ?? []).add(userID);
+      }
+      await _eventFirebase.doc(event.id).update(event.toFirestore());
+      int date = DateTime.now().dateOnly.millisecondsSinceEpoch;
+      var events =
+          await _eventFirebase.where("date", isGreaterThan: date).get();
+      return Success(
+        data: events.docs.map((event) => event.data()).toList(),
+      );
+    });
+  }
 
+  @override
+  Results<Stream<QuerySnapshot<EventDM>>> getMyFavList(String userID) {
+    int date = DateTime.now().dateOnly.millisecondsSinceEpoch;
+    Stream<QuerySnapshot<EventDM>> events = _eventFirebase
+        .where("date", isGreaterThan: date)
+        .where("favUsers", arrayContains: userID)
+        .snapshots();
+    return Success(data: events);
+  }
 }

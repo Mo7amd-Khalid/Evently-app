@@ -114,8 +114,9 @@ class UpdateEvent extends EventAction {
 
 class DeleteEvent extends EventAction{
   String eventID;
+  BuildContext context;
 
-  DeleteEvent(this.eventID);
+  DeleteEvent(this.eventID, this.context);
 }
 
 class GoToHomeScreen extends EventAction{}

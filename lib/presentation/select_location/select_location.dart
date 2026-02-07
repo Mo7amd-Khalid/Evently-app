@@ -31,13 +31,13 @@ class SelectLocationState extends State<SelectLocation> {
           {
             AppDialogs.actionDialog(
               context: context,
-              title: "Location Permission",
+              title: context.locale!.locationPermission,
               content: navigationState.message,
-              posActionTitle: "Allow",
+              posActionTitle: context.locale!.allow,
               posAction: () {
                 googleMapCubit.doAction(GetPermissionOfLocation());
               },
-              negActionTitle: "Cancel",
+              negActionTitle: context.locale!.cancel,
             );
           }
         case NavigateToEventManagementScreen():
@@ -85,7 +85,7 @@ class SelectLocationState extends State<SelectLocation> {
                 height: context.heightSize * 0.07,
                 color: AppColors.purple,
                 child: Text(
-                  "Tap on location to select",
+                  context.locale!.tabOnLocationToSelect,
                   style: context.textStyle.titleMedium!.copyWith(
                     color: AppColors.white,
                   ),
