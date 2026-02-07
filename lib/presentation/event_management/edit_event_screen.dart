@@ -14,6 +14,7 @@ import 'package:evently/presentation/widgets/app_dialogs.dart';
 import 'package:evently/validation/data_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 class EditEventScreen extends StatefulWidget {
@@ -38,8 +39,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
   @override
   void initState() {
     super.initState();
-    googleMapCubit.state.selectedLocation = null;
-    googleMapCubit.state.latLngOfSelectedLocation = null;
+    googleMapCubit.state.selectedLocation = widget.event.address;
+    googleMapCubit.state.latLngOfSelectedLocation = LatLng(widget.event.latitude, widget.event.longitude);
     eventCubit.doAction(ChangeSelectedCategory(widget.event.category.id));
     titleController.text = widget.event.title;
     descriptionController.text = widget.event.description;
@@ -355,6 +356,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                                 time!.hour,
                                 time!.minute,
                               ).millisecondsSinceEpoch,
+                          favUsers: widget.event.favUsers,
                         );
                         eventCubit.doAction(UpdateEvent(event, context));
                       },

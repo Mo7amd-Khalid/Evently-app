@@ -1,7 +1,7 @@
 import 'package:evently/presentation/bottom_nav_bar_tabs/map/map_screen.dart';
-import 'package:evently/ui/home/bottom_nav_bar_tabs/favorite.dart';
+import 'package:evently/presentation/bottom_nav_bar_tabs/favorite/favorite.dart';
+import 'package:evently/presentation/bottom_nav_bar_tabs/profile/profile.dart';
 import 'package:evently/presentation/bottom_nav_bar_tabs/home/home.dart';
-import 'package:evently/ui/home/bottom_nav_bar_tabs/profile.dart';
 import 'package:flutter/material.dart';
 
 class MainState {

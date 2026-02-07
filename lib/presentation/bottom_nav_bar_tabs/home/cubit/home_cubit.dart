@@ -27,6 +27,7 @@ class HomeCubit extends BaseCubit<HomeState, HomeAction, HomeNavigation>{
         _chooseSelectedCategory(action.index);
       case GetEvents():
         _getEvents(action.categoryID);
+
     }
   }
 
@@ -57,6 +58,7 @@ class HomeCubit extends BaseCubit<HomeState, HomeAction, HomeNavigation>{
         emit(state.copyWith(events: Resources.failure(exception: response.exception, message: response.message)));
     }
   }
+
 
 
 }

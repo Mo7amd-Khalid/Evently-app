@@ -47,7 +47,6 @@ class _EventDetailsState extends State<EventDetails> {
             },
           );
         case ShowErrorDialog():
-          // TODO: Handle this case.
           throw UnimplementedError();
       }
     });
@@ -82,7 +81,7 @@ class _EventDetailsState extends State<EventDetails> {
                   content: context.locale!.deleteEventConfirmation,
                   posActionTitle: context.locale!.yes,
                   posAction: () {
-                    eventCubit.doAction(DeleteEvent(event.id));
+                    eventCubit.doAction(DeleteEvent(event.id, context));
                   },
                   negActionTitle: context.locale!.no,
                 );

@@ -30,6 +30,8 @@ import '../../domain/repository/auth_repository.dart' as _i614;
 import '../../domain/repository/evently_repo.dart' as _i596;
 import '../../domain/use_case/auth_use_case.dart' as _i185;
 import '../../domain/use_case/use_case.dart' as _i719;
+import '../../presentation/bottom_nav_bar_tabs/favorite/cubit/favorite_cubit.dart'
+    as _i963;
 import '../../presentation/bottom_nav_bar_tabs/home/cubit/home_cubit.dart'
     as _i794;
 import '../../presentation/event_management/cubit/event_cubit.dart' as _i763;
@@ -114,6 +116,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i657.OnboardingCubit>(
       () => _i657.OnboardingCubit(gh<_i719.EventlyUseCase>()),
+    );
+    gh.factory<_i963.FavoriteCubit>(
+      () => _i963.FavoriteCubit(gh<_i719.EventlyUseCase>()),
     );
     gh.factory<_i763.EventCubit>(
       () => _i763.EventCubit(gh<_i719.EventlyUseCase>()),

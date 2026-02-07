@@ -64,6 +64,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
           Navigator.pop(context);
           AppDialogs.actionDialog(
             context: context,
+            title: context.locale!.requiredInformation,
             content: navigationState.message,
             posActionTitle: AppLocalizations.of(context)!.tryAgain,
           );
