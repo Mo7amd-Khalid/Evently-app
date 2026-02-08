@@ -87,6 +87,7 @@
   "addEvent": "إضافة الحدث",
 
 
+  "requiredInformation" : "بيانات مطلوبة",
   "titleRequired": "العنوان مطلوب",
   "locationRequired": "الموقع مطلوب",
   "descriptionRequired": "الوصف مطلوب",
@@ -117,8 +118,15 @@
   "checkYourMailToResetPassword": "تحقق من بريدك الإلكتروني لإعادة تعيين كلمة المرور",
 
   "editEvent" : "تعديل الحدث",
-  "accessLocationMessage" : "نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة."
-
+  "accessLocationMessage" : "نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة.",
+  "noEventToShow" : "لا يوجد احداث للعرض",
+  "tabOnLocationToSelect" : "اضغط علي المكان لتختاره",
+  "locationPermission": "الإذن لتحديد الموقع",
+  "cancel" : "إلغاء",
+  "allow" : "سماح",
+  "updateImageSuccessfully": "تم تعديل الصورة بنجاح",
+  "updateProfileImage" : "تعديل الصورة الشخصية",
+  "logoutConfirmation" : "هل انت متاكد من تسجيل الخروج؟"
 
 
 

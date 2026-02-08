@@ -1,7 +1,7 @@
 import 'package:evently/core/di/di.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/core/routes/routes.dart';
-import 'package:evently/core/utils/app_assets.dart';
+import 'package:evently/core/constant/app_assets.dart';
 import 'package:evently/core/utils/white_spaces.dart';
 import 'package:evently/presentation/register/cubit/register_contract.dart';
 import 'package:evently/presentation/register/cubit/register_cubit.dart';
@@ -233,7 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     /// language switch
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [LanguageSwitch()],
+                      children: [LanguageSwitch(cubit: setupCubit,)],
                     ),
                   ],
                 ),

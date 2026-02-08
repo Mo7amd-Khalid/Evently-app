@@ -1,5 +1,8 @@
 import 'package:evently/core/routes/routes.dart';
-import 'package:evently/presentation/event_management/event_management_screen.dart';
+import 'package:evently/data/models/event_dm.dart';
+import 'package:evently/presentation/event_management/add_event_screen.dart';
+import 'package:evently/presentation/event_management/edit_event_screen.dart';
+import 'package:evently/presentation/event_management/event_details.dart';
 import 'package:evently/presentation/forget_password/forget_password_screen.dart';
 import 'package:evently/presentation/select_location/select_location.dart';
 import 'package:evently/presentation/setup/setup_screen.dart';
@@ -51,10 +54,22 @@ abstract class AppRouter {
           builder: (_) => MainScreen(),
         );
 
-      case Routes.eventManagement:
+      case Routes.addEvent:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => EventManagementScreen(),
+          builder: (_) => AddEventScreen(),
+        );
+
+      case Routes.editEvent:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => EditEventScreen(event: settings.arguments as EventDM,),
+        );
+
+      case Routes.eventDetails:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => EventDetails(),
         );
 
       case Routes.selectLocation:

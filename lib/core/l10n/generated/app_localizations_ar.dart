@@ -238,6 +238,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addEvent => 'إضافة الحدث';
 
   @override
+  String get requiredInformation => 'بيانات مطلوبة';
+
+  @override
   String get titleRequired => 'العنوان مطلوب';
 
   @override
@@ -313,4 +316,28 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get accessLocationMessage =>
       'نحتاج إلى إذن الوصول إلى موقعك لعرض موقعك الحالي على الخريطة.';
+
+  @override
+  String get noEventToShow => 'لا يوجد احداث للعرض';
+
+  @override
+  String get tabOnLocationToSelect => 'اضغط علي المكان لتختاره';
+
+  @override
+  String get locationPermission => 'الإذن لتحديد الموقع';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get allow => 'سماح';
+
+  @override
+  String get updateImageSuccessfully => 'تم تعديل الصورة بنجاح';
+
+  @override
+  String get updateProfileImage => 'تعديل الصورة الشخصية';
+
+  @override
+  String get logoutConfirmation => 'هل انت متاكد من تسجيل الخروج؟';
 }

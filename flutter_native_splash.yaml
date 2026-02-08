@@ -19,7 +19,7 @@ flutter_native_splash:
   color_dark_ios: "#F2FEFF"
   color_web: "#F2FEFF"
   color_dark_web: "#F2FEFF"
-  image_android: assets/images/circle_logo.png
-  image_dark_android: assets/images/circle_logo.png
+  image_android: assets/images/circle_logo_android12.png
+  image_dark_android: assets/images/circle_logo_android12.png
   image_ios: assets/images/circle_logo.png
   image_dark_ios: assets/images/circle_logo.png

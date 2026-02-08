@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
-  static const String routeName = "Home Screen";
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -27,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
 
         case NavigateToEventManagementScreen():
           {
-            Navigator.pushNamed(context, Routes.eventManagement);
+            Navigator.pushNamed(context, Routes.addEvent);
           }
       }
     });

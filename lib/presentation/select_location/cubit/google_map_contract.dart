@@ -7,6 +7,7 @@ class GoogleMapState {
   LatLng? currentLocation;
   LatLng? latLngOfSelectedLocation;
   String? selectedLocation;
+  String? theCountryAndCity;
 
   GoogleMapState({
     this.isLoading = false,
@@ -14,7 +15,8 @@ class GoogleMapState {
     this.isGranted,
     this.currentLocation,
     this.selectedLocation,
-    this.latLngOfSelectedLocation
+    this.latLngOfSelectedLocation,
+    this.theCountryAndCity
   });
 
   GoogleMapState copyWith({
@@ -23,7 +25,8 @@ class GoogleMapState {
     bool? isGranted,
     LatLng? currentLocation,
     String? selectedLocation,
-    LatLng? latLngOfSelectedLocation
+    LatLng? latLngOfSelectedLocation,
+    String? theCountryAndCity,
   }) {
     return GoogleMapState(
       isLoading: isLoading ?? this.isLoading,
@@ -32,6 +35,7 @@ class GoogleMapState {
       currentLocation: currentLocation ?? this.currentLocation,
       selectedLocation: selectedLocation ?? this.selectedLocation,
       latLngOfSelectedLocation: latLngOfSelectedLocation ?? this.latLngOfSelectedLocation,
+      theCountryAndCity: theCountryAndCity ?? this.theCountryAndCity,
     );
   }
 }

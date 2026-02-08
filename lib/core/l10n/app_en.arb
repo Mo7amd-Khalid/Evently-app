@@ -83,7 +83,7 @@
   "chooseEventLocation": "Choose Event Location",
   "addEvent": "Add Event",
 
-
+  "requiredInformation" : "Required Information",
   "titleRequired": "The Title is required",
   "locationRequired": "The Location is required",
   "descriptionRequired": "The Description is required",
@@ -112,7 +112,14 @@
   "updateEvent" : "Update Event",
   "eventUpdatedSuccessfully" : "Event Updated Successfully",
   "editEvent" : "Edit Event",
-  "accessLocationMessage": "We need access to your location to show your current location on the map."
-
+  "accessLocationMessage": "We need access to your location to show your current location on the map.",
+  "noEventToShow" : "There is no events to show",
+  "tabOnLocationToSelect" : "Tap on the location to select",
+  "locationPermission" : "Location Permission",
+  "cancel" : "Cancel",
+  "allow" : "Allow",
+  "updateImageSuccessfully": "Image updated successfully",
+  "updateProfileImage" : "Update Profile Image",
+  "logoutConfirmation" : "Are you sure you want to logout?"
 
 }

@@ -542,6 +542,12 @@ abstract class AppLocalizations {
   /// **'Add Event'**
   String get addEvent;
 
+  /// No description provided for @requiredInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Information'**
+  String get requiredInformation;
+
   /// No description provided for @titleRequired.
   ///
   /// In en, this message translates to:
@@ -691,6 +697,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We need access to your location to show your current location on the map.'**
   String get accessLocationMessage;
+
+  /// No description provided for @noEventToShow.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no events to show'**
+  String get noEventToShow;
+
+  /// No description provided for @tabOnLocationToSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on the location to select'**
+  String get tabOnLocationToSelect;
+
+  /// No description provided for @locationPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Location Permission'**
+  String get locationPermission;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @allow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get allow;
+
+  /// No description provided for @updateImageSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Image updated successfully'**
+  String get updateImageSuccessfully;
+
+  /// No description provided for @updateProfileImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile Image'**
+  String get updateProfileImage;
+
+  /// No description provided for @logoutConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logoutConfirmation;
 }
 
 class _AppLocalizationsDelegate
