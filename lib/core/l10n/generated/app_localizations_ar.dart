@@ -331,4 +331,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get allow => 'سماح';
+
+  @override
+  String get updateImageSuccessfully => 'تم تعديل الصورة بنجاح';
+
+  @override
+  String get updateProfileImage => 'تعديل الصورة الشخصية';
+
+  @override
+  String get logoutConfirmation => 'هل انت متاكد من تسجيل الخروج؟';
 }

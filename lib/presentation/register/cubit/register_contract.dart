@@ -19,7 +19,7 @@ class RegisterState {
   }) {
     return RegisterState(
       user: user ?? this.user,
-      obscurePassword: obscurePassword ?? this.obscureRePassword,
+      obscurePassword: obscurePassword ?? this.obscurePassword,
       obscureRePassword: obscureRePassword ?? this.obscureRePassword,
     );
   }

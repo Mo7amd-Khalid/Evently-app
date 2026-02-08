@@ -1,7 +1,7 @@
 import 'package:evently/core/di/di.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/core/routes/routes.dart';
-import 'package:evently/core/utils/app_assets.dart';
+import 'package:evently/core/constant/app_assets.dart';
 import 'package:evently/presentation/setup/cubit/setup_cubit.dart';
 import 'package:evently/presentation/setup/cubit/setup_state.dart';
 import 'package:evently/presentation/widgets/language_switch.dart';

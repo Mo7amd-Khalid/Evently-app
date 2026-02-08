@@ -143,7 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingMessage1.
   ///
   /// In en, this message translates to:
-  /// **'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.'**
+  /// **'Dive into a world of categories crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.'**
   String get onboardingMessage1;
 
   /// No description provided for @onboardingTitle2.
@@ -155,7 +155,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingMessage2.
   ///
   /// In en, this message translates to:
-  /// **'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.'**
+  /// **'Take the hassle out of organizing categories with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.'**
   String get onboardingMessage2;
 
   /// No description provided for @onboardingTitle3.
@@ -701,7 +701,7 @@ abstract class AppLocalizations {
   /// No description provided for @noEventToShow.
   ///
   /// In en, this message translates to:
-  /// **'There is no events to show'**
+  /// **'There is no categories to show'**
   String get noEventToShow;
 
   /// No description provided for @tabOnLocationToSelect.
@@ -727,6 +727,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Allow'**
   String get allow;
+
+  /// No description provided for @updateImageSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Image updated successfully'**
+  String get updateImageSuccessfully;
+
+  /// No description provided for @updateProfileImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile Image'**
+  String get updateProfileImage;
+
+  /// No description provided for @logoutConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logoutConfirmation;
 }
 
 class _AppLocalizationsDelegate

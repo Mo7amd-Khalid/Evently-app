@@ -1,5 +1,6 @@
 import 'package:evently/data/network/results.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 abstract interface class AuthRemoteDatasource {
   Future<Results<User?>> login(String email, String password);
@@ -8,6 +9,7 @@ abstract interface class AuthRemoteDatasource {
   Future<void> sendVerificationEmail();
   Future<Results<User>> checkVerificationUser();
   Future<Results<void>> sendPasswordResetEmail(String email);
+  Future<Results<void>> updateUserImage(String? imageURL, BuildContext context);
   Future<Results<User>> getUserData();
 
 }

@@ -1,8 +1,10 @@
 import 'package:evently/core/utils/app_exeptions.dart';
+import 'package:evently/core/utils/context_func.dart';
 import 'package:evently/data/datasource/contract/auth_remote_datasource.dart';
 import 'package:evently/data/network/results.dart';
 import 'package:evently/data/network/safe_call.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRemoteDatasource)
@@ -83,6 +85,14 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
           return Failure(exception: UserNotFoundException(), message: UserNotFoundException().message);
         }
       return Success(data: response);
+    });
+  }
+
+  @override
+  Future<Results<void>> updateUserImage(String? imageURL, BuildContext context) {
+    return safeCall(()async{
+      await _firebaseAuth.currentUser!.updatePhotoURL(imageURL);
+      return Success(message: context.locale!.updateImageSuccessfully);
     });
   }
 }

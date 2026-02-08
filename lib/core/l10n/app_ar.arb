@@ -123,7 +123,10 @@
   "tabOnLocationToSelect" : "اضغط علي المكان لتختاره",
   "locationPermission": "الإذن لتحديد الموقع",
   "cancel" : "إلغاء",
-  "allow" : "سماح"
+  "allow" : "سماح",
+  "updateImageSuccessfully": "تم تعديل الصورة بنجاح",
+  "updateProfileImage" : "تعديل الصورة الشخصية",
+  "logoutConfirmation" : "هل انت متاكد من تسجيل الخروج؟"
 
 
 
