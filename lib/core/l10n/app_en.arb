@@ -117,6 +117,9 @@
   "tabOnLocationToSelect" : "Tap on the location to select",
   "locationPermission" : "Location Permission",
   "cancel" : "Cancel",
-  "allow" : "Allow"
+  "allow" : "Allow",
+  "updateImageSuccessfully": "Image updated successfully",
+  "updateProfileImage" : "Update Profile Image",
+  "logoutConfirmation" : "Are you sure you want to logout?"
 
 }

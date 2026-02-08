@@ -1,6 +1,7 @@
 import 'package:evently/data/network/results.dart';
 import 'package:evently/domain/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -37,5 +38,9 @@ class AuthUseCase {
   Future<Results<User>> getUserData(){
     return _authRepository.getUserData();
   }
+  Future<Results<void>> updateUserImage(String? imageURL, BuildContext context){
+    return _authRepository.updateUserImage(imageURL, context);
+  }
+
 
 }

@@ -34,6 +34,8 @@ import '../../presentation/bottom_nav_bar_tabs/favorite/cubit/favorite_cubit.dar
     as _i963;
 import '../../presentation/bottom_nav_bar_tabs/home/cubit/home_cubit.dart'
     as _i794;
+import '../../presentation/bottom_nav_bar_tabs/profile/cubit/profile_cubit.dart'
+    as _i665;
 import '../../presentation/event_management/cubit/event_cubit.dart' as _i763;
 import '../../presentation/forget_password/cubit/forget_password_cubit.dart'
     as _i671;
@@ -102,6 +104,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i794.HomeCubit(gh<_i185.AuthUseCase>(), gh<_i719.EventlyUseCase>()),
     );
+    gh.factory<_i665.ProfileCubit>(
+      () => _i665.ProfileCubit(gh<_i185.AuthUseCase>()),
+    );
     gh.factory<_i101.LoginCubit>(
       () => _i101.LoginCubit(gh<_i185.AuthUseCase>()),
     );
@@ -117,7 +122,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i657.OnboardingCubit>(
       () => _i657.OnboardingCubit(gh<_i719.EventlyUseCase>()),
     );
-    gh.factory<_i963.FavoriteCubit>(
+    gh.singleton<_i963.FavoriteCubit>(
       () => _i963.FavoriteCubit(gh<_i719.EventlyUseCase>()),
     );
     gh.factory<_i763.EventCubit>(

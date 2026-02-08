@@ -1,7 +1,7 @@
 import 'package:evently/core/di/di.dart';
 import 'package:evently/core/l10n/generated/app_localizations.dart';
 import 'package:evently/core/routes/routes.dart';
-import 'package:evently/core/utils/app_assets.dart';
+import 'package:evently/core/constant/app_assets.dart';
 import 'package:evently/core/utils/context_func.dart';
 import 'package:evently/core/utils/white_spaces.dart';
 import 'package:evently/presentation/login/cubit/login_contract.dart';
