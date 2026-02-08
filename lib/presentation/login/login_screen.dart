@@ -195,23 +195,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 22,
                         ),
 
-                        /// login with google
-                        OutlinedButton(
-                            onPressed: () {
-                              // todo signIn With Google
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 10,
-                              children: [
-                                Image.asset("assets/images/google_Logo.png"),
-                                Text(locale.loginWithGoogle),
-                              ],
-                            )),
-                        SizedBox(
-                          height: 22,
-                        ),
-
                         /// language switch
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
