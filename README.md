@@ -80,7 +80,7 @@ A new Flutter project that enable you to make all authentication process (login,
   <img src="readme_pic/time_picker.jpg" width="250" height="500" />
   <img src="readme_pic/calender_dialog.jpg" width="250" height="500" />
   <img src="readme_pic/select_location.jpg" width="250" height="500" />
-  <img src="readme_pic/edit_event.jpg.jpg" width="250" height="500" />
+  <img src="readme_pic/edit_event.jpg" width="250" height="500" />
 </p>
 
 ### Event Details
