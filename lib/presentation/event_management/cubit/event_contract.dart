@@ -9,7 +9,7 @@ class EventState {
       id: 0,
       nameEN: "Sport",
       nameAR: "الرياضة",
-      image: 'assets/categories/Sport.png',
+      image: 'assets/categories/sport.png',
       icon: Icons.sports_soccer,
     ),
     CategoryDM(

@@ -1,3 +1,4 @@
+import 'package:evently/core/constant/app_assets.dart';
 import 'package:evently/core/utils/resources.dart';
 import 'package:evently/data/models/category_dm.dart';
 import 'package:evently/data/models/event_dm.dart';
@@ -17,65 +18,65 @@ class HomeState {
     ),
     CategoryDM(
       id: 0,
-      nameEN: "Sport",
-      nameAR: "الرياضة",
-      image: 'assets/categories/Sport.png',
+      nameEN:"Sport",
+      nameAR:"الرياضة",
+      image: AppImages.sport,
       icon: Icons.sports_soccer,
     ),
     CategoryDM(
       id: 1,
       nameAR: "عيد ميلاد",
       nameEN: 'Birthday',
-      image: 'assets/categories/birthday.png',
+      image: AppImages.birthday,
       icon: Icons.cake,
     ),
     CategoryDM(
       id: 2,
       nameAR: "اجتماع",
       nameEN: "Meeting",
-      image: 'assets/categories/meeting.png',
+      image: AppImages.meeting,
       icon: Icons.people,
     ),
     CategoryDM(
       id: 3,
       nameAR: "ألعاب",
       nameEN: "Gaming",
-      image: 'assets/categories/gaming.png',
+      image: AppImages.gaming,
       icon: Icons.videogame_asset,
     ),
     CategoryDM(
       id: 4,
       nameAR: "تناول الطعام",
       nameEN: "Eating",
-      image: 'assets/categories/eating.png',
+      image: AppImages.eating,
       icon: Icons.fastfood,
     ),
     CategoryDM(
       id: 5,
       nameAR: "عطلة",
       nameEN: "Holiday",
-      image: 'assets/categories/holiday.png',
+      image: AppImages.holiday,
       icon: Icons.beach_access,
     ),
     CategoryDM(
       id: 6,
       nameAR: "معرض",
       nameEN: "Exhibition",
-      image: 'assets/categories/exhibition.png',
+      image: AppImages.exhibition,
       icon: Icons.museum,
     ),
     CategoryDM(
       id: 7,
       nameAR: "ورشة عمل",
       nameEN: "Workshop",
-      image: 'assets/categories/workshop.png',
+      image: AppImages.workshop,
       icon: Icons.work,
     ),
     CategoryDM(
       id: 8,
       nameAR: "نادي الكتاب",
       nameEN: "Book Club",
-      image: 'assets/categories/book_club.png',
+      image: AppImages.bookClub,
       icon: Icons.menu_book,
     ),
   ];
