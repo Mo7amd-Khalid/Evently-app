@@ -36,6 +36,9 @@ class AuthRepoImpl implements AuthRepository {
               KeysConstant.loginKey,
               true,
             );
+            await _firestoreRemoteDatasource.storeUserDataToUserCollection(
+              response.data!,
+            );
             return Success(data: response.data, message: response.message);
           } else {
             response.data!.delete();
@@ -125,10 +128,16 @@ class AuthRepoImpl implements AuthRepository {
         {
           for (QueryDocumentSnapshot document in response.data!.docs) {
             if (document[KeysConstant.emailKey] == email) {
-              print(email);
               await _authRemoteDatasource.sendPasswordResetEmail(email);
               return Success();
             }
+            else
+              {
+                return Failure(
+                  exception: UserNotFoundException(),
+                  message: UserNotFoundException().message,
+                );
+              }
           }
           return Failure(
             exception: UserNotFoundException(),
