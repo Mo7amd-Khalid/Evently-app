@@ -110,7 +110,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       borderRadius: BorderRadius.circular(16),
                       child: AspectRatio(
                         aspectRatio: 360 / 200,
-                        child: Image.asset(widget.event.category.image),
+                        child: Image.asset(state.categoriesList[state.selectedCategoryIndex].image),
                       ),
                     ),
                     10.verticalSpace,
